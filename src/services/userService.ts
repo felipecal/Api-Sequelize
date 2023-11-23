@@ -1,11 +1,11 @@
 export class UserService {
-  async getAllUsers(req: any, res: any) {
-
+  public async getAllUsers() {
+    const teste = `to aqui`
+    return teste
   }
 
-
-  async getUserById(req: any, res: any) {
-
+  async getUserById() {
+    return console.log('to aqui');
   }
 
   async createUser(req: any, res: any) {
