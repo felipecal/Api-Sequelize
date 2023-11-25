@@ -18,33 +18,37 @@ export class UserController {
   }
 
   async getUserById(req: any, res: any) {
-    // Implementar lógica para obter usuário por ID, se necessário
+    try {
+      const result = await this._userService.getUserById(req.body.id);
+    } catch (error) {
+      throw new Error(`Some error ocurred in getUserById ${error}`)
+    }
   }
 
   async createUser(req: any, res: any) {
     try {
-      // Implementar lógica para criar usuário, se necessário
-      res.status(200).json('User Create with Success');
+      const result = await this._userService.createUser(req.body);
+      res.status(200).json(`User Create with Success`);
     } catch (error) {
-      res.status(500).json('Some error occurred in createUser');
+      res.status(500).json(`Some error occurred in createUser ${error}`);
     }
   }
 
   async updateUser(req: any, res: any) {
     try {
-      // Implementar lógica para atualizar usuário, se necessário
-      res.status(200).json('User Update with Success');
+      const result = this._userService.updateUser(req.body);
+      res.status(200).json(`User Update with Success`);
     } catch (error) {
-      res.status(500).json('Some error occurred in updateUser');
+      res.status(500).json(`Some error occurred in updateUser ${error}`);
     }
   }
 
   async deleteUser(req: any, res: any) {
     try {
-      // Implementar lógica para excluir usuário, se necessário
-      res.status(200).json('User Deleted with Success');
+      const result = this._userService.deleteUserById(req.body.id);
+      res.status(200).json(`User Deleted with Success`);
     } catch (error) {
-      res.status(500).json('Some error occurred in deleteUser');
+      res.status(500).json(`Some error occurred in deleteUser ${error}`);
     }
   }
 }
