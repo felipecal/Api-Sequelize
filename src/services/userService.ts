@@ -4,19 +4,19 @@ export class UserService {
     return teste
   }
 
-  async getUserById() {
+  async getUserById(userId: any) {
     return console.log('to aqui');
   }
 
-  async createUser(req: any, res: any) {
+  async createUser(body: any) {
 
   }
 
-  async updateUser(req: any, res: any) {
+  async updateUser(body: any) {
 
   }
 
-  async deleteUserById(req: any, res: any) {
+  async deleteUserById(userId: any) {
 
   }
 }
