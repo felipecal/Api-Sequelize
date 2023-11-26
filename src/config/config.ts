@@ -3,8 +3,7 @@ import { config as dotEnv } from 'dotenv';
 
 dotEnv();
 
-const env = process.env.NODE_ENV;
-const dialect = env === 'test' ? 'sqlite' : 'postgres';
+const dialect = 'postgres';
 
 export const sequelize = new Sequelize({
     host: process.env.DB_HOST,
@@ -12,7 +11,6 @@ export const sequelize = new Sequelize({
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    storage: './tests/database.sqlite',
     dialect,
     define: {
         timestamps: true,
