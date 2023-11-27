@@ -9,7 +9,8 @@ export class UserModel extends Model {
 UserModel.init({
   user_id: {
     type: DataType.INTEGER,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
   user_name: {
     type: DataType.STRING,
