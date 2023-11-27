@@ -17,7 +17,7 @@ export class UserController {
     }
   }
 
-  async getUserById(req: any, res: any) {
+  async getUserById(req: Request, res: Response) {
     try {
       const userId = req.params.id
       const result = await this._userService.getUserById(userId);
@@ -27,8 +27,9 @@ export class UserController {
     }
   }
 
-  async createUser(req: any, res: any) {
+  async createUser(req: any, res: Response) {
     try {
+      console.log('tonoreq', req.body);
       const result = await this._userService.createUser(req.body);
       res.status(200).json(`User Create with Success`);
     } catch (error) {
@@ -36,7 +37,7 @@ export class UserController {
     }
   }
 
-  async updateUser(req: any, res: any) {
+  async updateUser(req: Request, res: Response) {
     try {
       const result = this._userService.updateUser(req.body);
       res.status(200).json(`User Update with Success`);
@@ -45,7 +46,7 @@ export class UserController {
     }
   }
 
-  async deleteUser(req: any, res: any) {
+  async deleteUser(req: Request, res: Response) {
     try {
       const result = this._userService.deleteUserById(req.body.id);
       res.status(200).json(`User Deleted with Success`);
