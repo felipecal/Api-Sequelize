@@ -27,11 +27,11 @@ export class UserController {
     }
   }
 
-  async createUser(req: any, res: Response) {
+  async createUser(req: Request, res: Response) {
     try {
-      console.log('tonoreq', req.body);
       const result = await this._userService.createUser(req.body);
-      res.status(200).json(`User Create with Success`);
+      console.log(result);
+      res.status(200).json({ message: 'User was created with success!', content: result });
     } catch (error) {
       res.status(500).json(`Some error occurred in createUser ${error}`);
     }
@@ -39,7 +39,7 @@ export class UserController {
 
   async updateUser(req: Request, res: Response) {
     try {
-      const result = this._userService.updateUser(req.body);
+      const result = this._userService.updateUser(req);
       res.status(200).json(`User Update with Success`);
     } catch (error) {
       res.status(500).json(`Some error occurred in updateUser ${error}`);

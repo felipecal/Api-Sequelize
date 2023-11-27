@@ -23,7 +23,7 @@ export class UserService {
       password: body.password,
       email: body.email
     })
-    return result
+    return result.dataValues
   }
 
   async updateUser(body: any) {
