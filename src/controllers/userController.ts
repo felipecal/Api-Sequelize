@@ -1,4 +1,3 @@
-import { UserModel } from "../database/models/userModel";
 import { UserService } from "../services/userService";
 import { Request, Response } from "express";
 
@@ -11,10 +10,7 @@ export class UserController {
 
   public async getAllUsers(req: Request, res: Response) {
     try {
-      // const resultado = await this._userService.getAllUsers();
-      const result = await UserModel.findAll();
-      console.log(result);
-      
+      const result = await this._userService.getAllUsers();
       res.status(200).json(result);
     } catch (error) {
       res.status(501).json(`Some error ocurred in getAllUsers ${error}`);
@@ -23,7 +19,9 @@ export class UserController {
 
   async getUserById(req: any, res: any) {
     try {
-      const result = await this._userService.getUserById(req.body.id);
+      const userId = req.params.id
+      const result = await this._userService.getUserById(userId);
+      res.status(200).json(result)
     } catch (error) {
       throw new Error(`Some error ocurred in getUserById ${error}`)
     }

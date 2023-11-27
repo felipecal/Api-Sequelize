@@ -1,11 +1,18 @@
+import { UserModel } from "../database/models/userModel";
+
 export class UserService {
   public async getAllUsers() {
-    const teste = `to aqui`
-    return teste
+    const result = await UserModel.findAll();
+    console.log(result);
+    return result
   }
 
-  async getUserById(userId: any) {
-    return console.log('to aqui');
+  async getUserById(userId: number) {
+      const result = await UserModel.findByPk(userId);
+      if( result === null) {
+        console.log(`User with id ${userId} was not found`);
+      }
+      return result;
   }
 
   async createUser(body: any) {
