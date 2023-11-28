@@ -19,8 +19,7 @@ export class UserController {
 
   async getUserById(req: Request, res: Response) {
     try {
-      const userId = req.params.id
-      const result = await this._userService.getUserById(userId);
+      const result = await this._userService.getUserById(req);
       res.status(200).json(result)
     } catch (error) {
       throw new Error(`Some error ocurred in getUserById ${error}`)
@@ -29,8 +28,7 @@ export class UserController {
 
   async createUser(req: Request, res: Response) {
     try {
-      const result = await this._userService.createUser(req.body);
-      console.log(result);
+      const result = await this._userService.createUser(req);
       res.status(200).json({ message: 'User was created with success!', content: result });
     } catch (error) {
       res.status(500).json(`Some error occurred in createUser ${error}`);
@@ -40,7 +38,7 @@ export class UserController {
   async updateUser(req: Request, res: Response) {
     try {
       const result = this._userService.updateUser(req);
-      res.status(200).json(`User Update with Success`);
+      res.status(200).json({ message: 'User was updated with success!', content: result });
     } catch (error) {
       res.status(500).json(`Some error occurred in updateUser ${error}`);
     }

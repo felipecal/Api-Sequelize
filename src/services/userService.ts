@@ -9,25 +9,33 @@ export class UserService {
     return result
   }
 
-  async getUserById(userId: any) {
-      const result = await UserModel.findByPk(userId);
-      if( result === null) {
-        console.log(`User with id ${userId} was not found`);
-      }
-      return result;
+  async getUserById(req: any) {
+    const userId = req.params.id
+    const resultOfGetUserById = await UserModel.findByPk(userId);
+    if (resultOfGetUserById === null) {
+      console.log(`User with id ${userId} was not found`);
+    }
+    return resultOfGetUserById;
   }
 
-  async createUser(body: any) {
-    const result = await UserModel.create({
+  async createUser(req: any) {
+    const body = req.body
+    const resultOfCreateUser = await UserModel.create({
       user_name: body.user_name,
       password: body.password,
       email: body.email
     })
-    return result.dataValues
+    return resultOfCreateUser.dataValues
   }
 
-  async updateUser(body: any) {
-
+  async updateUser(req: any) {
+    const userId = req.params.id;
+    const body = req.body;
+    const user = await UserModel.findByPk(userId);
+    console.log(user);
+    if (!user) throw new Error('User not found');
+    const resultOfUpdateUser = await UserModel.update(body, { where: { user_id: userId }, returning: true }); // TODO: Fazer a função retornar o objeto atualizado.
+    return resultOfUpdateUser;
   }
 
   async deleteUserById(userId: any) {
