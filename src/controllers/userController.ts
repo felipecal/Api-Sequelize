@@ -29,7 +29,11 @@ export class UserController {
   async createUser(req: Request, res: Response) {
     try {
       const result = await this._userService.createUser(req);
-      res.status(200).json({ message: 'User was created with success!', content: result });
+      if(result.status.statusOfUser === 'updated') {
+        res.status(200).json({ message: 'User was updated with success!', content: result.updateUserResult });
+      } else {
+        res.status(200).json({ message: 'User was created with success!', content: result.userResult });
+      }
     } catch (error) {
       res.status(500).json(`Some error occurred in createUser ${error}`);
     }

@@ -19,20 +19,32 @@ export class UserService {
   }
 
   async createUser(req: any) {
-    const body = req.body
-    const resultOfCreateUser = await UserModel.create({
-      user_name: body.user_name,
-      password: body.password,
-      email: body.email
-    })
-    return resultOfCreateUser.dataValues
+    const body = req.body;
+    const status = { statusOfUser: '' };
+    const [user, created] = await UserModel.findOrCreate({
+      where: {
+        email: body.email
+      }, defaults: {
+        user_name: body.user_name,
+        password: body.password,
+        email: body.email
+      }
+    });
+    if (!created) {
+      const userId = await user.dataValues.user_id;
+      const updateUser = await UserModel.update(body, { where: { user_id: userId }, returning: true })
+      status.statusOfUser = 'updated';
+      const updateUserResult = updateUser[1][0].dataValues;
+      return { updateUserResult, status }
+    }
+    const userResult = user.dataValues;
+    return { userResult, status };
   }
 
   async updateUser(req: any) {
     const userId = req.params.id;
     const body = req.body;
     const user = await UserModel.findByPk(userId);
-    console.log(user);
     if (!user) throw new Error('User not found');
     const resultOfUpdateUser = await UserModel.update(body, { where: { user_id: userId }, returning: true }); // TODO: Fazer a função retornar o objeto atualizado.
     return resultOfUpdateUser;
