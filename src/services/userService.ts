@@ -50,7 +50,14 @@ export class UserService {
     return resultOfUpdateUser;
   }
 
-  async deleteUserById(userId: any) {
-
+  async deleteUserById(req: any) {
+    const userId = req.params.id;
+    const getUser = await UserModel.findByPk(userId);
+    if (getUser) {
+      const deleteUser = await getUser.destroy()
+      return deleteUser
+    } else {
+      console.log('User was not found');
+    }
   }
 }
