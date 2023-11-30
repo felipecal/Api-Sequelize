@@ -1,6 +1,8 @@
 import { Json } from "sequelize/types/utils";
 import { UserModel } from "../database/models/userModel";
 import { AutoIncrement } from "sequelize-typescript";
+import { Request, Response } from "express";
+
 
 export class UserService {
   public async getAllUsers() {
@@ -9,7 +11,7 @@ export class UserService {
     return result
   }
 
-  async getUserById(req: any) {
+  async getUserById(req: Request) {
     const userId = req.params.id
     const resultOfGetUserById = await UserModel.findByPk(userId);
     if (resultOfGetUserById === null) {
@@ -18,7 +20,7 @@ export class UserService {
     return resultOfGetUserById;
   }
 
-  async createUser(req: any) {
+  async createUser(req: Request) {
     const body = req.body;
     const status = { statusOfUser: '' };
     const [user, created] = await UserModel.findOrCreate({
@@ -41,7 +43,7 @@ export class UserService {
     return { userResult, status };
   }
 
-  async updateUser(req: any) {
+  async updateUser(req: Request) {
     const userId = req.params.id;
     const body = req.body;
     const user = await UserModel.findByPk(userId);
@@ -50,7 +52,7 @@ export class UserService {
     return resultOfUpdateUser;
   }
 
-  async deleteUserById(req: any) {
+  async deleteUserById(req: Request) {
     const userId = req.params.id;
     const getUser = await UserModel.findByPk(userId);
     if (getUser) {
