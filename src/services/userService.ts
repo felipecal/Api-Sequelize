@@ -13,9 +13,6 @@ export class UserService {
   async getUserById(req: Request) {
     const userId = req.params.id
     const resultOfGetUserById = await UserModel.findByPk(userId);
-    if (resultOfGetUserById === null) {
-      console.log(`User with id ${userId} was not found`);
-    }
     return resultOfGetUserById;
   }
 
@@ -58,7 +55,7 @@ export class UserService {
       const deleteUser = await getUser.destroy()
       return deleteUser
     } else {
-      console.log('User was not found');
+      console.log(`User with id ${userId} was not found`);
     }
   }
 }
