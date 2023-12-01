@@ -20,7 +20,11 @@ export class UserController {
   async getUserById(req: Request, res: Response) {
     try {
       const result = await this._userService.getUserById(req);
-      res.status(200).json(result)
+      if (result === null) {
+        res.status(500).json({ Message: `User with id ${req.params.id} was not found` })
+      } else {
+        res.status(200).json(result)
+      }
     } catch (error) {
       throw new Error(`Some error ocurred in getUserById ${error}`)
     }
