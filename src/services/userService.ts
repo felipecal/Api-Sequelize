@@ -7,7 +7,6 @@ import { Request, Response } from "express";
 export class UserService {
   public async getAllUsers() {
     const result = await UserModel.findAll();
-    console.log(result);
     return result
   }
 
