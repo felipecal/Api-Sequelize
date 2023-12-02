@@ -1,6 +1,6 @@
 # Api Sequelize
 
-This is a simple api with nodejs, aws rds and sequelize.
+This is a simple api with nodejs, sequelize, aws rds or docker database.
 
 ## Technologies Used
 
@@ -13,9 +13,9 @@ This is a simple api with nodejs, aws rds and sequelize.
 1. Clone this repository to your development environment:
 
 ```bash
-git clone [https://github.com/felipecal/store-management.git](https://github.com/felipecal/Api-Aws-SDK3)
+git clone https://github.com/felipecal/Api-Sequelize.git
 
-cd Api-Aws-SDK3
+cd Api-Sequelize
 ```
 
 2. Install the dependencies:
