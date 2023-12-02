@@ -21,22 +21,34 @@ export class UserController {
     try {
       const result = await this._userService.getUserById(req);
       if (result === null) {
-        res.status(500).json({ Message: `User with id ${req.params.id} was not found` })
+        res
+          .status(500)
+          .json({ Message: `User with id ${req.params.id} was not found` });
       } else {
-        res.status(200).json(result)
+        res.status(200).json(result);
       }
     } catch (error) {
-      throw new Error(`Some error ocurred in getUserById ${error}`)
+      throw new Error(`Some error ocurred in getUserById ${error}`);
     }
   }
 
   async createUser(req: Request, res: Response) {
     try {
       const result = await this._userService.createUser(req);
-      if (result.status.statusOfUser === 'updated') {
-        res.status(200).json({ message: 'User was updated with success!', content: result.updateUserResult });
+      if (result.status.statusOfUser === "updated") {
+        res
+          .status(200)
+          .json({
+            message: "User was updated with success!",
+            content: result.updateUserResult,
+          });
       } else {
-        res.status(200).json({ message: 'User was created with success!', content: result.userResult });
+        res
+          .status(200)
+          .json({
+            message: "User was created with success!",
+            content: result.userResult,
+          });
       }
     } catch (error) {
       res.status(500).json(`Some error occurred in createUser ${error}`);
@@ -46,7 +58,9 @@ export class UserController {
   async updateUser(req: Request, res: Response) {
     try {
       const result = this._userService.updateUser(req);
-      res.status(200).json({ message: 'User was updated with success!', content: result });
+      res
+        .status(200)
+        .json({ message: "User was updated with success!", content: result });
     } catch (error) {
       res.status(500).json(`Some error occurred in updateUser ${error}`);
     }
@@ -55,7 +69,9 @@ export class UserController {
   async deleteUser(req: Request, res: Response) {
     try {
       const result = this._userService.deleteUserById(req);
-      res.status(200).json({ message: `User Deleted with Success`, content: result });
+      res
+        .status(200)
+        .json({ message: `User Deleted with Success`, content: result });
     } catch (error) {
       res.status(500).json(`Some error occurred in deleteUser ${error}`);
     }

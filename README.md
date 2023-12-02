@@ -19,6 +19,7 @@ cd Api-Aws-SDK3
 ```
 
 2. Install the dependencies:
+
 ```bash
 npm install
 
@@ -28,6 +29,7 @@ yarn install
 ```
 
 3. Start the applicaation
+
 ```bash
 npm start
 
@@ -35,6 +37,3 @@ or
 
 yarn start
 ```
-
-
-
