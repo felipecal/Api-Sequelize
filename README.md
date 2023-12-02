@@ -1,6 +1,6 @@
-# Api Sequelize
+ # ⛇ Api Sequelize ⛇
 
-This is a simple api with nodejs, sequelize, aws rds or docker database.
+This is a simple CRUD api in TypeScript, sequelize, aws rds or docker database.
 
 ## Technologies Used
 
