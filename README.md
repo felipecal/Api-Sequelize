@@ -1,11 +1,11 @@
-# Api Aws Sequelize
+# Api Sequelize
 
 This is a simple api with nodejs, aws rds and sequelize.
 
 ## Technologies Used
 
 - NodeJS
-- AWS RDS
+- AWS RDS or Docker Database
 - Sequelize
 
 ## Installation
