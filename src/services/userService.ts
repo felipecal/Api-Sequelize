@@ -1,7 +1,5 @@
-import { Json } from 'sequelize/types/utils';
 import { UserModel } from '../database/models/userModel';
-import { AutoIncrement } from 'sequelize-typescript';
-import { Request, Response } from 'express';
+import { Request } from 'express';
 
 export class UserService {
   public async getAllUsers() {
