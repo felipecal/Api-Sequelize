@@ -1,15 +1,25 @@
+import { ProductService } from "../services/productService";
+
 export class ProductController {
-  async getProductById(req: any, res: any) {
-    res.status(200).json('Get ProductById');
+  private _productService: ProductService;
+
+  constructor() {
+    this._productService = new ProductService();
   }
 
   async getAllProducts(req: any, res: any) {
     try {
-      res.status(200).json('Get all Products');
+      const resultGetAllProducts = await this._productService.getAllProducts();
+      res.status(200).json(resultGetAllProducts);
     } catch (error) {
       res.status(500).json('Some error occurred in GetAllProducts');
     }
   }
+
+  async getProductById(req: any, res: any) {
+    res.status(200).json('Get ProductById');
+  }
+
 
   async createProduct(req: any, res: any) {
     try {
