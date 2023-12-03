@@ -1,7 +1,7 @@
-import { Json } from "sequelize/types/utils";
-import { UserModel } from "../database/models/userModel";
-import { AutoIncrement } from "sequelize-typescript";
-import { Request, Response } from "express";
+import { Json } from 'sequelize/types/utils';
+import { UserModel } from '../database/models/userModel';
+import { AutoIncrement } from 'sequelize-typescript';
+import { Request, Response } from 'express';
 
 export class UserService {
   public async getAllUsers() {
@@ -17,7 +17,7 @@ export class UserService {
 
   async createUser(req: Request) {
     const body = req.body;
-    const status = { statusOfUser: "" };
+    const status = { statusOfUser: '' };
     const [user, created] = await UserModel.findOrCreate({
       where: {
         email: body.email,
@@ -34,7 +34,7 @@ export class UserService {
         where: { user_id: userId },
         returning: true,
       });
-      status.statusOfUser = "updated";
+      status.statusOfUser = 'updated';
       const updateUserResult = updateUser[1][0].dataValues;
       return { updateUserResult, status };
     }
@@ -46,7 +46,7 @@ export class UserService {
     const userId = req.params.id;
     const body = req.body;
     const user = await UserModel.findByPk(userId);
-    if (!user) throw new Error("User not found");
+    if (!user) throw new Error('User not found');
     const resultOfUpdateUser = await UserModel.update(body, {
       where: { user_id: userId },
       returning: true,

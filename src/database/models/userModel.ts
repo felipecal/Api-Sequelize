@@ -1,6 +1,6 @@
-import { sequelize } from "../../config/config";
-import { Model } from "sequelize";
-import { DataType } from "sequelize-typescript";
+import { sequelize } from '../../config/config';
+import { Model } from 'sequelize';
+import { DataType } from 'sequelize-typescript';
 
 export class UserModel extends Model {}
 
@@ -25,7 +25,7 @@ UserModel.init(
     },
   },
   {
-    tableName: "users",
+    tableName: 'users',
     timestamps: false,
     sequelize,
   },
