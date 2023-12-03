@@ -16,4 +16,4 @@ export const sequelize = new Sequelize({
     timestamps: true,
     underscored: true,
   },
-});
+}); //TODO: Create database connection function
