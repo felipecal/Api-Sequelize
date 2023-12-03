@@ -1,4 +1,4 @@
- # ⛇ Api Sequelize ⛇
+# ⛇ Api Sequelize ⛇
 
 This is a simple CRUD api in TypeScript, sequelize, aws rds or docker database.
 
