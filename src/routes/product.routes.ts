@@ -1,16 +1,16 @@
 import { Router } from 'express';
 import { ProductController } from '../controllers/productController';
 
-export const router = Router();
+export const procutRoutes = Router();
 
 const productController = new ProductController();
 
-router.get('/getAllUsers', productController.getAllProducts);
+procutRoutes.get('/getAllProducts', (req, res) => productController.getAllProducts(req, res));
 
-router.get('/getUser/:id', productController.getProductById);
+procutRoutes.get('/getProduct/:id', (req, res) => productController.getProductById(req, res));
 
-router.post('/createUser', productController.createProduct);
+procutRoutes.post('/createProduct', (req, res) => productController.createProduct(req, res));
 
-router.put('/updateUser/:id', productController.updateProduct);
+procutRoutes.put('/updateProduct/:id', (req, res) => productController.updateProduct(req, res));
 
-router.delete('/deleteUser/:id', productController.deleteProduct);
+procutRoutes.delete('/deleteProduct/:id', (req, res) => productController.deleteProduct(req, res));
