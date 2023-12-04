@@ -7,19 +7,22 @@ export class ProductService {
     return productResult;
   }
 
-  async getProductById(req: Request) {
+  async getProductById(req: any) {
+    const productId = req.params.id;
+    const productResult = await ProductModel.findByPk(productId);
+    return productResult;
 
   }
 
-  async createProduct(req: Request){
+  async createProduct(req: Request) {
 
   }
 
-  async updateProduct(req: Request){
+  async updateProduct(req: Request) {
 
   }
 
-  async delteProduct(req: Request){
+  async delteProduct(req: Request) {
 
   }
 }
