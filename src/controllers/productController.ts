@@ -17,7 +17,12 @@ export class ProductController {
   }
 
   async getProductById(req: any, res: any) {
-    res.status(200).json('Get ProductById');
+    try {
+      const resultOfGetProduct = await this._productService.getProductById(req);
+      res.status(200).json(resultOfGetProduct);
+    } catch (error) {
+      res.status(500).json('Some error ocurred in getProductById')
+    }
   }
 
 
