@@ -3,7 +3,11 @@ import { Model } from 'sequelize';
 import { UserModel } from './userModel';
 import { DataType } from 'sequelize-typescript';
 
-export class ProductModel extends Model { }
+export class ProductModel extends Model {
+  static associate() {
+    ProductModel.belongsTo(UserModel);
+  }
+}
 
 ProductModel.init(
   {

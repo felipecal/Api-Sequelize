@@ -1,8 +1,15 @@
 import { sequelize } from '../../config/config';
 import { Model } from 'sequelize';
 import { DataType } from 'sequelize-typescript';
+import { ProductModel } from './productModel';
 
-export class UserModel extends Model {}
+export class UserModel extends Model {
+  static associate() {
+    UserModel.hasMany(ProductModel, {
+      foreignKey: 'cod_user'
+    })
+  }
+}
 
 UserModel.init(
   {
