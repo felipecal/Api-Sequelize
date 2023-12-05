@@ -28,10 +28,6 @@ ProductModel.init(
       type: DataType.FLOAT,
       allowNull: false
     },
-    quantity: {
-      type: DataType.INTEGER,
-      allowNull: false
-    },
     cod_user: {
       type: DataType.INTEGER,
       allowNull: false,
