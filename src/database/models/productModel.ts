@@ -1,7 +1,7 @@
 import { sequelize } from '../../config/config';
 import { Model } from 'sequelize';
 import { UserModel } from './userModel';
-import { DataType } from 'sequelize-typescript';
+import { AllowNull, DataType } from 'sequelize-typescript';
 
 export class ProductModel extends Model {
   static associate() {
@@ -23,6 +23,14 @@ ProductModel.init(
     description: {
       type: DataType.STRING,
       allowNull: false,
+    },
+    value: {
+      type: DataType.FLOAT,
+      allowNull: false
+    },
+    quantity: {
+      type: DataType.INTEGER,
+      allowNull: false
     },
     cod_user: {
       type: DataType.INTEGER,
