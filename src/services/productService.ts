@@ -29,8 +29,16 @@ export class ProductService {
 
   }
 
-  async updateProduct(req: Request) {
-
+  async updateProduct(req: any) {
+    const productId = req.params.id;
+    const body = req.body;
+    const product = await ProductModel.findByPk(productId);
+    if (!product) throw new Error('Product not found');
+    const resultOfUpdateUser = await ProductModel.update(body, {
+      where: { product_id: productId },
+      returning: true,
+    }); // TODO: Fazer a função retornar o objeto atualizado.
+    return resultOfUpdateUser;
   }
 
   async delteProduct(req: Request) {
