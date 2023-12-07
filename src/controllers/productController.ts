@@ -37,7 +37,8 @@ export class ProductController {
 
   async updateProduct(req: any, res: any) {
     try {
-      res.status(200).json('Product Update with Success');
+      const resultOfUpdateProduct = await this._productService.updateProduct(req);
+      res.status(200).json(resultOfUpdateProduct);
     } catch (error) {
       res.status(500).json('Some error occurred in updateProduct');
     }
