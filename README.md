@@ -28,7 +28,9 @@ or
 yarn install
 ```
 
-3. Start the applicaation
+3. Put the database environments in .env file
+
+4. Start the applicaation
 
 ```bash
 npm start
