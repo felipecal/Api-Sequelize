@@ -1,7 +1,8 @@
-import { sequelize } from '../../config/config';
+import { sequelize, databaseConnection } from '../../config/config';
 import { Model } from 'sequelize';
 import { DataType } from 'sequelize-typescript';
 import { ProductModel } from './productModel';
+databaseConnection();
 
 export class UserModel extends Model {
   static associate() {
