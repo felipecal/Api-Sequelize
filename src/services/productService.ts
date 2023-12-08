@@ -37,7 +37,7 @@ export class ProductService {
     const resultOfUpdateUser = await ProductModel.update(body, {
       where: { product_id: productId },
       returning: true,
-    }); // TODO: Fazer a função retornar o objeto atualizado.
+    });
     return resultOfUpdateUser;
   }
 
