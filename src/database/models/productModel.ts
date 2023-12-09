@@ -1,7 +1,7 @@
 import { sequelize, databaseConnection } from '../../config/config';
 import { Model } from 'sequelize';
 import { UserModel } from './userModel';
-import { AllowNull, DataType } from 'sequelize-typescript';
+import { DataType } from 'sequelize-typescript';
 databaseConnection();
 export class ProductModel extends Model {
   static associate() {
