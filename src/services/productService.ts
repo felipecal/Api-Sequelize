@@ -41,7 +41,14 @@ export class ProductService {
     return resultOfUpdateUser;
   }
 
-  async delteProduct(req: Request) {
-
+  async delteProduct(req: any) {
+    const productId = req.params.id;
+    const getProduct = await ProductModel.findByPk(productId);
+    if (getProduct) {
+      const deleteProduct = await getProduct.destroy();
+      return deleteProduct;
+    } else {
+      console.log(`Product with id ${productId} was not found`);
+    }
   }
 }
