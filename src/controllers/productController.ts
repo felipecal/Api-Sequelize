@@ -50,8 +50,8 @@ export class ProductController {
         console.log('Cannot delete user whitout id');
 
       }
-      const resultOfDelteUser = await this._productService.delteProduct(req);
-      res.status(200).json(resultOfDelteUser);
+      await this._productService.delteProduct(req);
+      res.status(200).json(`User wiht id ${req.params.id} was delete with success!`);
     } catch (error) {
       res.status(500).json('Some error occurred in deleteProduct');
     }
