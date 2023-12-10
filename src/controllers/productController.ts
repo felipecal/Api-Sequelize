@@ -46,7 +46,8 @@ export class ProductController {
 
   async deleteProduct(req: any, res: any) {
     try {
-      res.status(200).json('Product Deleted with Success');
+      const resultOfDelteUser = await this._productService.delteProduct(req);
+      res.status(200).json(resultOfDelteUser);
     } catch (error) {
       res.status(500).json('Some error occurred in deleteProduct');
     }
