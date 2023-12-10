@@ -26,7 +26,7 @@ ProductModel.init(
     },
     value: {
       type: DataType.FLOAT,
-      allowNull: false
+      allowNull: false,
     },
     cod_user: {
       type: DataType.INTEGER,

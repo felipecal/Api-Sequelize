@@ -48,7 +48,7 @@ export class UserService {
     const resultOfUpdateUser = await UserModel.update(body, {
       where: { user_id: userId },
       returning: true,
-    }); 
+    });
     return resultOfUpdateUser;
   }
 

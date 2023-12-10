@@ -18,7 +18,6 @@ export const sequelize = new Sequelize({
   },
 });
 
-
 export function databaseConnection() {
   try {
     sequelize.authenticate();

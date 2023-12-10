@@ -1,4 +1,4 @@
-import { ProductService } from "../services/productService";
+import { ProductService } from '../services/productService';
 
 export class ProductController {
   private _productService: ProductService;
@@ -21,10 +21,9 @@ export class ProductController {
       const resultOfGetProduct = await this._productService.getProductById(req);
       res.status(200).json(resultOfGetProduct);
     } catch (error) {
-      res.status(500).json('Some error ocurred in getProductById')
+      res.status(500).json('Some error ocurred in getProductById');
     }
   }
-
 
   async createProduct(req: any, res: any) {
     try {
@@ -48,7 +47,6 @@ export class ProductController {
     try {
       if (req.params.id === null || undefined) {
         console.log('Cannot delete user whitout id');
-
       }
       await this._productService.delteProduct(req);
       res.status(200).json(`User wiht id ${req.params.id} was delete with success!`);

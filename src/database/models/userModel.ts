@@ -7,8 +7,8 @@ databaseConnection();
 export class UserModel extends Model {
   static associate() {
     UserModel.hasMany(ProductModel, {
-      foreignKey: 'cod_user'
-    })
+      foreignKey: 'cod_user',
+    });
   }
 }
 

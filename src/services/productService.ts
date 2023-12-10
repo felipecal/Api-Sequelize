@@ -1,4 +1,4 @@
-import { ProductModel } from "../database/models/productModel";
+import { ProductModel } from '../database/models/productModel';
 
 export class ProductService {
   async getAllProducts() {
@@ -10,7 +10,6 @@ export class ProductService {
     const productId = req.params.id;
     const productResult = await ProductModel.findByPk(productId);
     return productResult;
-
   }
 
   async createProduct(req: any) {
@@ -23,10 +22,9 @@ export class ProductService {
       product_name: productBody.product_name,
       description: productBody.description,
       value: productBody.value,
-      cod_user: productBody.cod_user
+      cod_user: productBody.cod_user,
     });
-    return productResult
-
+    return productResult;
   }
 
   async updateProduct(req: any) {
