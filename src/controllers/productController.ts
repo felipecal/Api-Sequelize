@@ -46,6 +46,10 @@ export class ProductController {
 
   async deleteProduct(req: any, res: any) {
     try {
+      if (req.params.id === null || undefined) {
+        console.log('Cannot delete user whitout id');
+
+      }
       const resultOfDelteUser = await this._productService.delteProduct(req);
       res.status(200).json(resultOfDelteUser);
     } catch (error) {
