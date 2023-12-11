@@ -12,7 +12,7 @@ export class ProductController {
       const resultGetAllProducts = await this._productService.getAllProducts();
       res.status(200).json(resultGetAllProducts);
     } catch (error) {
-      res.status(500).json('Some error occurred in GetAllProducts');
+      res.status(500).json(`Some error occurred in GetAllProducts ${error}`);
     }
   }
 
@@ -21,7 +21,7 @@ export class ProductController {
       const resultOfGetProduct = await this._productService.getProductById(req);
       res.status(200).json(resultOfGetProduct);
     } catch (error) {
-      res.status(500).json('Some error ocurred in getProductById');
+      res.status(500).json(`Some error ocurred in getProductById ${error}`);
     }
   }
 
@@ -30,7 +30,7 @@ export class ProductController {
       const resultOfCreateProduct = await this._productService.createProduct(req);
       res.status(200).json(resultOfCreateProduct);
     } catch (error) {
-      res.status(500).json('Some error occurred in createProduct');
+      res.status(500).json(`Some error occurred in createProduct ${error}`);
     }
   }
 
@@ -39,19 +39,19 @@ export class ProductController {
       const resultOfUpdateProduct = await this._productService.updateProduct(req);
       res.status(200).json(resultOfUpdateProduct);
     } catch (error) {
-      res.status(500).json('Some error occurred in updateProduct');
+      res.status(500).json(`Some error occurred in updateProduct ${error}`);
     }
   }
 
   async deleteProduct(req: any, res: any) {
     try {
       if (req.params.id === null || undefined) {
-        console.log('Cannot delete user whitout id');
+        console.log(`Cannot delete user whitout id`);
       }
       await this._productService.delteProduct(req);
       res.status(200).json(`User wiht id ${req.params.id} was delete with success!`);
     } catch (error) {
-      res.status(500).json('Some error occurred in deleteProduct');
+      res.status(500).json(`Some error occurred in deleteProduct ${error}`);
     }
   }
 }
