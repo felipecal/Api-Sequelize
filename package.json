@@ -6,11 +6,12 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/index.ts",
-    "test": "jest --coverage --detectOpenHandles src/index.js --passWithNoTests",
+    "test": "jest --coverage --detectOpenHandles",
     "build": "tsc",
     "format": "yarn prettier --write ."
   },
   "dependencies": {
+    "@babel/preset-env": "^7.23.5",
     "@types/node": "^20.9.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
