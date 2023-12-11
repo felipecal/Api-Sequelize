@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/index.ts",
-    "test": "jest --coverage --detectOpenHandles",
+    "test": "jest --coverage --forceExit",
     "build": "tsc",
     "format": "yarn prettier --write ."
   },
