@@ -1,4 +1,4 @@
-import { UserModel } from '../database/models/userModel';
+import { UserModel } from '../models/userModel';
 import { Request } from 'express';
 
 export class UserService {

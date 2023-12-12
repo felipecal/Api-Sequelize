@@ -1,4 +1,4 @@
-import { ProductModel } from '../database/models/productModel';
+import { ProductModel } from '../models/productModel';
 
 export class ProductService {
   async getAllProducts() {
