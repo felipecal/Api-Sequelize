@@ -17,6 +17,7 @@ git clone https://github.com/felipecal/Api-Sequelize.git
 
 cd Api-Sequelize
 ```
+
 <br>
 
 2. Install the dependencies:
@@ -28,13 +29,17 @@ or
 
 yarn install
 ```
+
 <br>
 
 3. Database
-- Create database in docker with command: 
+
+- Create database in docker with command:
+
 ```
 docker run --name postgres -e POSTGRES_PASSWORD=1234 -e POSTGRES_USER=postgres --restart always -p 5432:5432 -d postgres:latest
 ```
+
 - After create database in docker or if you already have a database, you just need to config the file .env with the environments of your database
 
 <br>

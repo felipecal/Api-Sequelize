@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { userRoutes } from './routes/user.routes';
 import { procutRoutes } from './routes/product.routes';
-import cors from "cors";
+import cors from 'cors';
 
 export const app = express();
 dotenv.config();
