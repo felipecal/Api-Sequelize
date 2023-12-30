@@ -13,6 +13,13 @@ export class UserService {
     return resultOfGetUserById;
   }
 
+  async getUserByUsername(req: Request) {
+    const username = req.params.username;
+    const password = req.params.password;
+    const resultofGetUserByUsername = await UserModel.findOne({ where: { user_name: username, password: password } });
+    return resultofGetUserByUsername;
+  }
+
   async createUser(req: Request) {
     const body = req.body;
     const status = { statusOfUser: '' };
