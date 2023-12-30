@@ -30,6 +30,19 @@ export class UserController {
     }
   }
 
+  public async getUserByUsername(req: Request, res: Response) {
+    try {
+      const result = await this._userService.getUserByUsername(req);
+      if (result === null) {
+        res.status(500).json({ Message: `User with username ${req.params.username} was not found` })
+      } else {
+        res.status(200).json(result);
+      }
+    } catch (error) {
+      throw new Error(`Some error ocurred in GetUserByUsername ${error}`)
+    }
+  }
+
   async createUser(req: Request, res: Response) {
     try {
       const result = await this._userService.createUser(req);
