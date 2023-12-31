@@ -1,5 +1,6 @@
 import { UserService } from '../services/userService';
 import { Request, Response } from 'express';
+import bcrypt from 'bcrypt'
 
 export class UserController {
   private _userService: UserService;
@@ -30,16 +31,20 @@ export class UserController {
     }
   }
 
-  public async getUserByUsername(req: Request, res: Response) {
+  public async authenticateUser(req: Request, res: Response) {
     try {
-      const result = await this._userService.getUserByUsername(req);
-      if (result === null) {
-        res.status(500).json({ Message: `User with username ${req.params.username} was not found` })
+      const resultOfAuthenticateUser = await this._userService.authenticateUser(req);
+      if (resultOfAuthenticateUser === undefined) {
+        return res.status(401).json({ message: 'User was not found.' });
+      }
+      if (resultOfAuthenticateUser) {
+        return res.status(200).json({ message: 'Authentication successful.' });
       } else {
-        res.status(200).json(result);
+        return res.status(401).json({ message: 'Invalid credentials.' });
       }
     } catch (error) {
-      throw new Error(`Some error ocurred in GetUserByUsername ${error}`)
+      console.error(`Erro na autenticação: ${error}`);
+      return res.status(500).json({ message: 'Authentication error.' });
     }
   }
 
