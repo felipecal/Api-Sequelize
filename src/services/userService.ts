@@ -14,11 +14,23 @@ export class UserService {
     return resultOfGetUserById;
   }
 
-  async getUserByUsername(req: Request) {
-    const username = req.params.username;
-    const password = req.params.password;
-    const resultofGetUserByUsername = await UserModel.findOne({ where: { user_name: username, password: password } });
-    return resultofGetUserByUsername;
+  async authenticateUser(req: Request) {
+    const { user_name, password } = req.body;
+    try {
+      const user = await UserModel.findOne({
+        where: {
+          user_name: user_name
+        },
+      });
+      if (!user) {
+        return undefined;
+      } else {
+        const passwordMatch = await bcrypt.compare(password, user.dataValues.password);
+        return passwordMatch;
+      }
+    } catch (error) {
+      throw new Error(`Some error ocurred in authenticateUser`)
+    }
   }
 
   async createUser(req: Request) {
