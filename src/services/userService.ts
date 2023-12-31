@@ -1,5 +1,6 @@
 import { UserModel } from '../models/userModel';
 import { Request } from 'express';
+import bcrypt from 'bcrypt';
 
 export class UserService {
   public async getAllUsers() {
@@ -23,28 +24,43 @@ export class UserService {
   async createUser(req: Request) {
     const body = req.body;
     const status = { statusOfUser: '' };
-    const [user, created] = await UserModel.findOrCreate({
-      where: {
-        email: body.email,
-      },
-      defaults: {
-        user_name: body.user_name,
-        password: body.password,
-        email: body.email,
-      },
-    });
-    if (!created) {
-      const userId = await user.dataValues.user_id;
-      const updateUser = await UserModel.update(body, {
-        where: { user_id: userId },
-        returning: true,
+
+    try {
+      const hashedPassword = await bcrypt.hash(body.password, 12);
+      const [user, created] = await UserModel.findOrCreate({
+        where: {
+          email: body.email,
+        },
+        defaults: {
+          user_name: body.user_name,
+          password: hashedPassword,
+          email: body.email,
+        },
       });
-      status.statusOfUser = 'updated';
-      const updateUserResult = updateUser[1][0].dataValues;
-      return { updateUserResult, status };
+
+      if (!created) {
+        const userId = user.dataValues.user_id;
+        const updateUser = await UserModel.update(
+          {
+            user_name: body.user_name,
+            password: hashedPassword,
+            email: body.email,
+          },
+          {
+            where: { user_id: userId },
+            returning: true,
+          }
+        );
+        status.statusOfUser = 'updated';
+        const updateUserResult = updateUser[1][0].dataValues;
+        return { updateUserResult, status };
+      }
+      const userResult = user.dataValues;
+      return { userResult, status };
+    } catch (error) {
+      console.error(`Erro ao criar/atualizar usuário: ${error}`);
+      throw error;
     }
-    const userResult = user.dataValues;
-    return { userResult, status };
   }
 
   async updateUser(req: Request) {
