@@ -38,9 +38,9 @@ export class UserController {
         return res.status(401).json({ message: 'User was not found.' });
       }
       if (resultOfAuthenticateUser) {
-        return res.status(200).json({ message: 'Authentication successful.' });
+        return res.status(200).json(resultOfAuthenticateUser);
       } else {
-        return res.status(401).json({ message: 'Invalid credentials.' });
+        return res.status(401).json(resultOfAuthenticateUser);
       }
     } catch (error) {
       console.error(`Erro na autenticação: ${error}`);
