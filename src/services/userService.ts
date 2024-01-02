@@ -1,6 +1,7 @@
 import { UserModel } from '../models/userModel';
 import { Request } from 'express';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 export class UserService {
   public async getAllUsers() {
@@ -23,15 +24,21 @@ export class UserService {
         },
       });
       if (!user) {
-        return undefined;
+        return { success: false, message: 'User was not found' };
       } else {
         const passwordMatch = await bcrypt.compare(password, user.dataValues.password);
-        return passwordMatch;
+        if (passwordMatch) {
+          const token = jwt.sign({ user_id: user.dataValues.user_id }, 'secret_key', { expiresIn: '24h' });// TODO: Put the secret_key as environment
+          return { success: true, token: token };
+        } else {
+          return { success: false, message: 'Invalid Password' };
+        }
       }
-    } catch (error) {
-      throw new Error(`Some error ocurred in authenticateUser`)
+    } catch (error: any) {
+      throw new Error(`Some error occurred in authenticateUser: ${error.message}`);
     }
   }
+
 
   async createUser(req: Request) {
     const body = req.body;
