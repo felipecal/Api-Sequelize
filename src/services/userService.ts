@@ -33,7 +33,7 @@ export class UserService {
           if (!secret_key) {
             throw new Error("JWT_SECRET is not defined in the environment");
           }
-          const token = jwt.sign({ user_id: user.dataValues.user_id }, secret_key, { expiresIn: '24h' });// TODO: Put the secret_key as environment
+          const token = jwt.sign({ user_id: user.dataValues.user_id }, secret_key, { expiresIn: '24h' });
           return { success: true, token: token };
         } else {
           return { success: false, message: 'Invalid Password' };
