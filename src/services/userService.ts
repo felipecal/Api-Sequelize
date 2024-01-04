@@ -2,6 +2,7 @@ import { UserModel } from '../models/userModel';
 import { Request } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { config as dotEnv } from 'dotenv';
 
 export class UserService {
   public async getAllUsers() {
@@ -28,7 +29,11 @@ export class UserService {
       } else {
         const passwordMatch = await bcrypt.compare(password, user.dataValues.password);
         if (passwordMatch) {
-          const token = jwt.sign({ user_id: user.dataValues.user_id }, 'secret_key', { expiresIn: '24h' });// TODO: Put the secret_key as environment
+          const secret_key = process.env.JWT_SECRET;
+          if (!secret_key) {
+            throw new Error("JWT_SECRET is not defined in the environment");
+          }
+          const token = jwt.sign({ user_id: user.dataValues.user_id }, secret_key, { expiresIn: '24h' });// TODO: Put the secret_key as environment
           return { success: true, token: token };
         } else {
           return { success: false, message: 'Invalid Password' };
@@ -42,6 +47,8 @@ export class UserService {
 
   async createUser(req: Request) {
     const body = req.body;
+    console.log('req.body', body);
+    
     const status = { statusOfUser: '' };
 
     try {
