@@ -21,7 +21,7 @@ export class UserService {
     try {
       const user = await UserModel.findOne({
         where: {
-          user_name: user_name
+          user_name: user_name,
         },
       });
       if (!user) {
@@ -31,7 +31,7 @@ export class UserService {
         if (passwordMatch) {
           const secret_key = process.env.JWT_SECRET;
           if (!secret_key) {
-            throw new Error("JWT_SECRET is not defined in the environment");
+            throw new Error('JWT_SECRET is not defined in the environment');
           }
           const token = jwt.sign({ user_id: user.dataValues.user_id }, secret_key, { expiresIn: '24h' });
           return { success: true, token: token };
@@ -44,11 +44,10 @@ export class UserService {
     }
   }
 
-
   async createUser(req: Request) {
     const body = req.body;
     console.log('req.body', body);
-    
+
     const status = { statusOfUser: '' };
 
     try {
@@ -75,7 +74,7 @@ export class UserService {
           {
             where: { user_id: userId },
             returning: true,
-          }
+          },
         );
         status.statusOfUser = 'updated';
         const updateUserResult = updateUser[1][0].dataValues;
