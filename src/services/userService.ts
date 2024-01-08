@@ -2,7 +2,6 @@ import { UserModel } from '../models/userModel';
 import { Request } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { config as dotEnv } from 'dotenv';
 
 export class UserService {
   public async getAllUsers() {
