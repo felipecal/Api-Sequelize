@@ -24,7 +24,7 @@ export class UserService {
         },
       });
       if (!user) {
-        return { success: false, message: 'User was not found' };
+        return { success: false, type: { username: 'Invalid username' }, message: 'User was not found' };
       } else {
         const passwordMatch = await bcrypt.compare(password, user.dataValues.password);
         if (passwordMatch) {
@@ -35,7 +35,7 @@ export class UserService {
           const token = jwt.sign({ user_id: user.dataValues.user_id }, secret_key, { expiresIn: '24h' });
           return { success: true, token: token };
         } else {
-          return { success: false, message: 'Invalid Password' };
+          return { success: false, type: { password: 'Invalid password' }, message: 'Invalid Password' };
         }
       }
     } catch (error: any) {
