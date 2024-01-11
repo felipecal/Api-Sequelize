@@ -43,7 +43,17 @@ export class UserController {
       }
     } catch (error) {
       console.error(`Erro na autenticação: ${error}`);
-      return res.status(500).json({ message: 'Authentication error.' });
+      return res.status(401).json({ message: 'Authentication error.' });
+    }
+  }
+
+  public async validateUserToken(req: Request, res: Response) {
+    try {
+      const resultOfValidateToken = await this._userService.validateToken(req);
+      res.status(200).json(resultOfValidateToken)
+    } catch (error) {
+      console.error(`Some error ocurred in validateUserToken ${error}`)
+      return res.status(401).json({ message: 'Error in validate Token' });
     }
   }
 
