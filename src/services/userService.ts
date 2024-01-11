@@ -54,7 +54,7 @@ export class UserService {
       console.log('resultToken', resultToken);
       return { valid: true };
     } catch (error) {
-      return { valid: false }
+      return { valid: false };
     }
   }
 
