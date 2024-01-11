@@ -43,6 +43,21 @@ export class UserService {
     }
   }
 
+  async validateToken(req: Request) {
+    try {
+      const { token } = req.body;
+      const secret_key = process.env.JWT_SECRET;
+      if (!secret_key) {
+        throw new Error('JWT_SECRET is not defined in the environment');
+      }
+      const resultToken = jwt.verify(token, secret_key);
+      console.log('resultToken', resultToken);
+      return { valid: true };
+    } catch (error) {
+      return { valid: false }
+    }
+  }
+
   async createUser(req: Request) {
     const body = req.body;
     console.log('req.body', body);
