@@ -15,3 +15,5 @@ userRoutes.post('/createUser', (req, res) => userController.createUser(req, res)
 userRoutes.put('/updateUser/:id', (req, res) => userController.updateUser(req, res));
 
 userRoutes.delete('/deleteUser/:id', (req, res) => userController.deleteUser(req, res));
+
+userRoutes.post('/validateToken', (req, res) => userController.validateUserToken(req, res));
