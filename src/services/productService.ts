@@ -14,7 +14,6 @@ export class ProductService {
 
   async createProduct(req: any) {
     const productBody = req.body;
-    console.log(productBody);
     if (!productBody) {
       console.log('Cannot create the data, because the body is not passed');
     }
