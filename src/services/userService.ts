@@ -51,7 +51,6 @@ export class UserService {
         throw new Error('JWT_SECRET is not defined in the environment');
       }
       const resultToken = jwt.verify(token, secret_key);
-      console.log('resultToken', resultToken);
       return { valid: true };
     } catch (error) {
       return { valid: false };
@@ -60,10 +59,7 @@ export class UserService {
 
   async createUser(req: Request) {
     const body = req.body;
-    console.log('req.body', body);
-
     const status = { statusOfUser: '' };
-
     try {
       const hashedPassword = await bcrypt.hash(body.password, 12);
       const [user, created] = await UserModel.findOrCreate({
