@@ -11,9 +11,9 @@ export class UserController {
   public async getAllUsers(req: Request, res: Response) {
     try {
       const result = await this._userService.getAllUsers();
-      res.status(200).json(result);
+      return res.status(200).json(result);
     } catch (error) {
-      res.status(501).json(`Some error ocurred in getAllUsers ${error}`);
+      return res.status(501).json(`Some error ocurred in getAllUsers ${error}`);
     }
   }
 
@@ -21,7 +21,7 @@ export class UserController {
     try {
       const result = await this._userService.getUserById(req);
       if (result === null) {
-        res.status(500).json({ Message: `User with id ${req.params.id} was not found` });
+        return res.status(500).json({ Message: `User with id ${req.params.id} was not found` });
       } else {
         res.status(200).json(result);
       }
@@ -50,7 +50,7 @@ export class UserController {
   public async validateUserToken(req: Request, res: Response) {
     try {
       const resultOfValidateToken = await this._userService.validateToken(req);
-      res.status(200).json(resultOfValidateToken);
+      return res.status(200).json(resultOfValidateToken);
     } catch (error) {
       console.error(`Some error ocurred in validateUserToken ${error}`);
       return res.status(401).json({ message: 'Error in validate Token' });
@@ -60,6 +60,7 @@ export class UserController {
   async createUser(req: Request, res: Response) {
     try {
       const result = await this._userService.createUser(req);
+      if (!result) return res.status(500).json('No result returned from createUser');
       if (result.status.statusOfUser === 'updated') {
         res.status(200).json({
           message: 'User was updated with success!',
@@ -72,25 +73,25 @@ export class UserController {
         });
       }
     } catch (error) {
-      res.status(500).json(`Some error occurred in createUser ${error}`);
+      return res.status(500).json(`Some error occurred in createUser ${error}`);
     }
   }
 
   async updateUser(req: Request, res: Response) {
     try {
       const result = this._userService.updateUser(req);
-      res.status(200).json({ message: 'User was updated with success!', content: result });
+      return res.status(200).json({ message: 'User was updated with success!', content: result });
     } catch (error) {
-      res.status(500).json(`Some error occurred in updateUser ${error}`);
+      return res.status(500).json(`Some error occurred in updateUser ${error}`);
     }
   }
 
   async deleteUser(req: Request, res: Response) {
     try {
       const result = this._userService.deleteUserById(req);
-      res.status(200).json({ message: `User Deleted with Success`, content: result });
+      return res.status(200).json({ message: `User Deleted with Success`, content: result });
     } catch (error) {
-      res.status(500).json(`Some error occurred in deleteUser ${error}`);
+      return res.status(500).json(`Some error occurred in deleteUser ${error}`);
     }
   }
 }
