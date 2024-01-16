@@ -10,36 +10,36 @@ export class ProductController {
   async getAllProducts(req: any, res: any) {
     try {
       const resultGetAllProducts = await this._productService.getAllProducts();
-      res.status(200).json(resultGetAllProducts);
+      return res.status(200).json(resultGetAllProducts);
     } catch (error) {
-      res.status(500).json(`Some error occurred in GetAllProducts ${error}`);
+      return res.status(500).json(`Some error occurred in GetAllProducts ${error}`);
     }
   }
 
   async getProductById(req: any, res: any) {
     try {
       const resultOfGetProduct = await this._productService.getProductById(req);
-      res.status(200).json(resultOfGetProduct);
+      return res.status(200).json(resultOfGetProduct);
     } catch (error) {
-      res.status(500).json(`Some error ocurred in getProductById ${error}`);
+      return res.status(500).json(`Some error ocurred in getProductById ${error}`);
     }
   }
 
   async createProduct(req: any, res: any) {
     try {
       const resultOfCreateProduct = await this._productService.createProduct(req);
-      res.status(200).json(resultOfCreateProduct);
+      return res.status(200).json(resultOfCreateProduct);
     } catch (error) {
-      res.status(500).json(`Some error occurred in createProduct ${error}`);
+      return res.status(500).json(`Some error occurred in createProduct ${error}`);
     }
   }
 
   async updateProduct(req: any, res: any) {
     try {
       const resultOfUpdateProduct = await this._productService.updateProduct(req);
-      res.status(200).json(resultOfUpdateProduct);
+      return res.status(200).json(resultOfUpdateProduct);
     } catch (error) {
-      res.status(500).json(`Some error occurred in updateProduct ${error}`);
+      return res.status(500).json(`Some error occurred in updateProduct ${error}`);
     }
   }
 
@@ -49,9 +49,9 @@ export class ProductController {
         console.log(`Cannot delete user whitout id`);
       }
       await this._productService.delteProduct(req);
-      res.status(200).json(`User wiht id ${req.params.id} was delete with success!`);
+      return res.status(200).json(`User wiht id ${req.params.id} was delete with success!`);
     } catch (error) {
-      res.status(500).json(`Some error occurred in deleteProduct ${error}`);
+      return res.status(500).json(`Some error occurred in deleteProduct ${error}`);
     }
   }
 }
