@@ -10,14 +10,18 @@ export class UserService {
   }
 
   async getUserById(req: Request) {
-    const userId = req.params.id;
-    const resultOfGetUserById = await UserModel.findByPk(userId);
-    return resultOfGetUserById;
+    try {
+      const userId = req.params.id;
+      const resultOfGetUserById = await UserModel.findByPk(userId);
+      return resultOfGetUserById;
+    } catch (error) {
+      console.error(`Some error ocurred in getUserById ${error}`)
+    }
   }
 
   async authenticateUser(req: Request) {
-    const { user_name, password } = req.body;
     try {
+      const { user_name, password } = req.body;
       const user = await UserModel.findOne({
         where: {
           user_name: user_name,
@@ -39,7 +43,7 @@ export class UserService {
         }
       }
     } catch (error: any) {
-      throw new Error(`Some error occurred in authenticateUser: ${error.message}`);
+      console.error(`Some error occurred in authenticateUser: ${error.message}`);
     }
   }
 
@@ -50,7 +54,7 @@ export class UserService {
       if (!secret_key) {
         throw new Error('JWT_SECRET is not defined in the environment');
       }
-      const resultToken = jwt.verify(token, secret_key);
+      const resultToken = jwt.verify(token, secret_key); //FIXME: Fix validateToken
       return { valid: true };
     } catch (error) {
       return { valid: false };
@@ -58,9 +62,10 @@ export class UserService {
   }
 
   async createUser(req: Request) {
-    const body = req.body;
-    const status = { statusOfUser: '' };
     try {
+      const body = req.body;
+      if (!body) throw new Error('Body can not be null')
+      const status = { statusOfUser: '' };
       const hashedPassword = await bcrypt.hash(body.password, 12);
       const [user, created] = await UserModel.findOrCreate({
         where: {
@@ -94,30 +99,37 @@ export class UserService {
       return { userResult, status };
     } catch (error) {
       console.error(`Erro ao criar/atualizar usuário: ${error}`);
-      throw error;
     }
   }
 
   async updateUser(req: Request) {
-    const userId = req.params.id;
-    const body = req.body;
-    const user = await UserModel.findByPk(userId);
-    if (!user) throw new Error('User not found');
-    const resultOfUpdateUser = await UserModel.update(body, {
-      where: { user_id: userId },
-      returning: true,
-    });
-    return resultOfUpdateUser;
+    try {
+      const userId = req.params.id;
+      const body = req.body;
+      const user = await UserModel.findByPk(userId);
+      if (!user) throw new Error('User not found');
+      const resultOfUpdateUser = await UserModel.update(body, {
+        where: { user_id: userId },
+        returning: true,
+      });
+      return resultOfUpdateUser;
+    } catch (error) {
+      console.error(`Some error ocurred in updateUser ${error}`)
+    }
   }
 
   async deleteUserById(req: Request) {
-    const userId = req.params.id;
-    const getUser = await UserModel.findByPk(userId);
-    if (getUser) {
-      const deleteUser = await getUser.destroy();
-      return deleteUser;
-    } else {
-      console.log(`User with id ${userId} was not found`);
+    try {
+      const userId = req.params.id;
+      const getUser = await UserModel.findByPk(userId);
+      if (getUser) {
+        const deleteUser = await getUser.destroy();
+        return deleteUser;
+      } else {
+        throw new Error(`User with id ${userId} was not found`)
+      }
+    } catch (error) {
+      console.error(`Some error ocurred in deleteUserByID ${error}`)
     }
   }
 }
