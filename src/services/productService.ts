@@ -6,7 +6,7 @@ export class ProductService {
       const productResult = await ProductModel.findAll();
       return productResult;
     } catch (error) {
-      console.error(`Some error ocurred in getAllProducts ${error}`)
+      console.error(`Some error ocurred in getAllProducts ${error}`);
     }
   }
 
@@ -16,7 +16,7 @@ export class ProductService {
       const productResult = await ProductModel.findByPk(productId);
       return productResult;
     } catch (error) {
-      console.error(`Some error ocurred in getProductById ${error}`)
+      console.error(`Some error ocurred in getProductById ${error}`);
     }
   }
 
@@ -48,7 +48,7 @@ export class ProductService {
       });
       return resultOfUpdateUser;
     } catch (error) {
-      console.error(`Some error ocurred in updatePorudct ${error}`)
+      console.error(`Some error ocurred in updatePorudct ${error}`);
     }
   }
 

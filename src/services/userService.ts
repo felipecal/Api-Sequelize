@@ -15,7 +15,7 @@ export class UserService {
       const resultOfGetUserById = await UserModel.findByPk(userId);
       return resultOfGetUserById;
     } catch (error) {
-      console.error(`Some error ocurred in getUserById ${error}`)
+      console.error(`Some error ocurred in getUserById ${error}`);
     }
   }
 
@@ -64,7 +64,7 @@ export class UserService {
   async createUser(req: Request) {
     try {
       const body = req.body;
-      if (!body) throw new Error('Body can not be null')
+      if (!body) throw new Error('Body can not be null');
       const status = { statusOfUser: '' };
       const hashedPassword = await bcrypt.hash(body.password, 12);
       const [user, created] = await UserModel.findOrCreate({
@@ -114,7 +114,7 @@ export class UserService {
       });
       return resultOfUpdateUser;
     } catch (error) {
-      console.error(`Some error ocurred in updateUser ${error}`)
+      console.error(`Some error ocurred in updateUser ${error}`);
     }
   }
 
@@ -126,10 +126,10 @@ export class UserService {
         const deleteUser = await getUser.destroy();
         return deleteUser;
       } else {
-        throw new Error(`User with id ${userId} was not found`)
+        throw new Error(`User with id ${userId} was not found`);
       }
     } catch (error) {
-      console.error(`Some error ocurred in deleteUserByID ${error}`)
+      console.error(`Some error ocurred in deleteUserByID ${error}`);
     }
   }
 }
