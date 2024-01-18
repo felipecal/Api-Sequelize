@@ -54,10 +54,11 @@ export class UserService {
       if (!secret_key) {
         throw new Error('JWT_SECRET is not defined in the environment');
       }
-      const resultToken = jwt.verify(token, secret_key); //FIXME: Fix validateToken
-      return { valid: true };
+      jwt.verify(token, secret_key);
+      return { valid: true }
     } catch (error) {
-      return { valid: false };
+      console.error(`Some error ocurred in validate user token`)
+      return { valid: false }
     }
   }
 
