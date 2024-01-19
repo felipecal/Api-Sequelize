@@ -55,10 +55,10 @@ export class UserService {
         throw new Error('JWT_SECRET is not defined in the environment');
       }
       jwt.verify(token, secret_key);
-      return { valid: true }
+      return { valid: true };
     } catch (error) {
-      console.error(`Some error ocurred in validate user token`)
-      return { valid: false }
+      console.error(`Some error ocurred in validate user token`);
+      return { valid: false };
     }
   }
 
