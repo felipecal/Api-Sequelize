@@ -30,7 +30,7 @@ ProductModel.init(
     },
     quantity: {
       type: DataType.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
     cod_user: {
       type: DataType.INTEGER,
