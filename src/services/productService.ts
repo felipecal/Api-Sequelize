@@ -28,6 +28,7 @@ export class ProductService {
         product_name: productBody.product_name,
         description: productBody.description,
         value: productBody.value,
+        quantity: productBody.quantity,
         cod_user: productBody.cod_user,
       });
       return productResult;
