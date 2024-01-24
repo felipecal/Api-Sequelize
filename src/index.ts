@@ -11,26 +11,28 @@ dotenv.config();
 const port = process.env.PORT || 3001;
 
 const swaggerDefinition = {
+  openapi: '3.0.0',
   info: {
     title: 'Api Sequelize',
-    version: "1.0",
-    description: "Documenation of the Sequelize Api"
+    version: '1.0',
+    description: 'Documentation of the Sequelize API',
   },
   components: {
-    schemas: require('./schemas.json')
-  }
+    schemas: require('./schemas.json'),
+  },
 };
+
 const options = {
   swaggerDefinition: swaggerDefinition,
   apis: ['./routes/*.ts']
 }
+const swaggerSpec = swaggerJsDoc(options);
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.use(cors());
 app.use(express.json());
 app.use(userRoutes, procutRoutes);
 
-const swaggerSpec = swaggerJsDoc(options);
-app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}🔥`);
