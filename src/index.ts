@@ -24,15 +24,14 @@ const swaggerDefinition = {
 
 const options = {
   swaggerDefinition: swaggerDefinition,
-  apis: ['./routes/*.ts']
-}
+  apis: ['./routes/*.ts'],
+};
 const swaggerSpec = swaggerJsDoc(options);
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.use(cors());
 app.use(express.json());
 app.use(userRoutes, procutRoutes);
-
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}🔥`);
