@@ -1,9 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { userRoutes } from './routes/user.routes';
-import { procutRoutes } from './routes/product.routes';
+import { productsRoutes } from './routes/product.routes';
 import cors from 'cors';
-import swaggerUI from 'swagger-ui-express';
+import swaggerUi from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
 
 export const app = express();
@@ -18,20 +18,21 @@ const swaggerDefinition = {
     description: 'Documentation of the Sequelize API',
   },
   components: {
-    schemas: require('./schemas.json'),
+    schemas: require('./swagger/userSchema.json'),
   },
 };
 
 const options = {
-  swaggerDefinition: swaggerDefinition,
-  apis: ['./routes/*.ts'],
+  swaggerDefinition,
+  apis: [__dirname + '/swagger/userSwagger.js'],
 };
+
 const swaggerSpec = swaggerJsDoc(options);
-app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(cors());
 app.use(express.json());
-app.use(userRoutes, procutRoutes);
+app.use(userRoutes, productsRoutes);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}🔥`);
