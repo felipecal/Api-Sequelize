@@ -1,16 +1,16 @@
 import { Router } from 'express';
 import { ProductController } from '../controllers/productController';
 
-export const procutRoutes = Router();
+export const productsRoutes = Router();
 
 const productController = new ProductController();
 
-procutRoutes.get('/getAllProducts', (req, res) => productController.getAllProducts(req, res));
+productsRoutes.get('/getAllProducts', (req, res) => productController.getAllProducts(req, res));
 
-procutRoutes.get('/getProduct/:id', (req, res) => productController.getProductById(req, res));
+productsRoutes.get('/getProduct/:id', (req, res) => productController.getProductById(req, res));
 
-procutRoutes.post('/createProduct', (req, res) => productController.createProduct(req, res));
+productsRoutes.post('/createProduct', (req, res) => productController.createProduct(req, res));
 
-procutRoutes.put('/updateProduct/:id', (req, res) => productController.updateProduct(req, res));
+productsRoutes.put('/updateProduct/:id', (req, res) => productController.updateProduct(req, res));
 
-procutRoutes.delete('/deleteProduct/:id', (req, res) => productController.deleteProduct(req, res));
+productsRoutes.delete('/deleteProduct/:id', (req, res) => productController.deleteProduct(req, res));
