@@ -16,7 +16,7 @@
 
 /**
  * @swagger
- * /getUser/:id:
+ * /getUser/{id}:
  *   get:
  *     tags:
  *      - User
@@ -25,13 +25,13 @@
  *       - application/json
  *     parameters:
  *      - in: path
- *        id: id
+ *        name: id
  *        required: true
  *     responses:
  *       200:
  *         description: A list of users.
  *         schema:
  *           $ref: '#/components/schemas/User'
- *      400:
+ *       400:
  *         description: User was not found
  */
