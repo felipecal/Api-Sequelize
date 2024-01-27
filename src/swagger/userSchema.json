@@ -23,9 +23,9 @@
     "required": ["user_name", "password", "email"],
     "example": {
       "user_id": 1,
-      "user_name": "john_doe",
+      "user_name": "tony_iommi",
       "password": "secretpassword",
-      "email": "john.doe@example.com"
+      "email": "tony_iommi@example.com"
     }
   }
 }
