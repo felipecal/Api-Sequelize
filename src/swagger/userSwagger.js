@@ -4,7 +4,7 @@
  *   get:
  *     tags:
  *      - User
- *     description: Retrieve a list of all users in the application.
+ *     description: Returns all users from database.
  *     produces:
  *       - application/json
  *     responses:
@@ -26,10 +26,11 @@
  *     parameters:
  *      - in: path
  *        name: id
+ *        type: integer
  *        required: true
  *     responses:
  *       200:
- *         description: A list of users.
+ *         description: Return a user by the id.
  *         schema:
  *           $ref: '#/components/schemas/User'
  *       400:
