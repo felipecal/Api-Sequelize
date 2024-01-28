@@ -21,7 +21,7 @@ export class UserController {
     try {
       const result = await this._userService.getUserById(req);
       if (result === null) {
-        return res.status(500).json({ Message: `User with id ${req.params.id} was not found` });
+        return res.status(404).json({ Message: `User with id ${req.params.id} was not found` });
       } else {
         res.status(200).json(result);
       }
@@ -67,7 +67,7 @@ export class UserController {
           content: result.updateUserResult,
         });
       } else {
-        res.status(200).json({
+        res.status(201).json({
           message: 'User was created with success!',
           content: result.userResult,
         });
@@ -79,7 +79,7 @@ export class UserController {
 
   async updateUser(req: Request, res: Response) {
     try {
-      const result = this._userService.updateUser(req);
+      const result = await this._userService.updateUser(req);
       return res.status(200).json({ message: 'User was updated with success!', content: result });
     } catch (error) {
       return res.status(500).json(`Some error occurred in updateUser ${error}`);
@@ -88,8 +88,12 @@ export class UserController {
 
   async deleteUser(req: Request, res: Response) {
     try {
-      const result = this._userService.deleteUserById(req);
-      return res.status(200).json({ message: `User Deleted with Success`, content: result });
+      const result = await this._userService.deleteUserById(req);
+      if (result === null) {
+        return res.status(404).json({ Message: `User with id ${req.params.id} was not found` });
+      } else {
+        return res.status(200).json({ message: `User Deleted with Success`, content: result });
+      }
     } catch (error) {
       return res.status(500).json(`Some error occurred in deleteUser ${error}`);
     }
