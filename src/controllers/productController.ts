@@ -20,7 +20,7 @@ export class ProductController {
     try {
       const resultOfGetProduct = await this._productService.getProductById(req);
       if (resultOfGetProduct === null) {
-        return res.status(404).json({ Message: `Product with id ${req.params.id} was not found.` })
+        return res.status(404).json({ Message: `Product with id ${req.params.id} was not found.` });
       } else {
         return res.status(200).json(resultOfGetProduct);
       }
@@ -32,7 +32,7 @@ export class ProductController {
   async createProduct(req: any, res: any) {
     try {
       const resultOfCreateProduct = await this._productService.createProduct(req);
-      if (!resultOfCreateProduct) return res.status(500).json('No result returned from createProduct')
+      if (!resultOfCreateProduct) return res.status(500).json('No result returned from createProduct');
       return res.status(201).json(resultOfCreateProduct);
     } catch (error) {
       return res.status(500).json(`Some error occurred in createProduct ${error}`);
@@ -51,7 +51,7 @@ export class ProductController {
   async deleteProduct(req: any, res: any) {
     try {
       if (req.params.id === null || undefined) {
-        return res.status(404).json({ Message: `Product with id ${req.params.id} was not nound` })
+        return res.status(404).json({ Message: `Product with id ${req.params.id} was not nound` });
       }
       await this._productService.delteProduct(req);
       return res.status(200).json(`User wiht id ${req.params.id} was delete with success!`);

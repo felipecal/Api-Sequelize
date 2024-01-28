@@ -41,7 +41,6 @@
  *         description: User not found.
  */
 
-
 /**
  * @swagger
  * /authenticateUser:
