@@ -18,13 +18,16 @@ const swaggerDefinition = {
     description: 'Documentation of the Sequelize API',
   },
   components: {
-    schemas: require('./swagger/userSchema.json'),
+    schemas: { //FIXME: Fix the Schemas in swagger
+      User: require('./swagger/userSchema.json'),
+      Product: require('./swagger/productSchema.json'),
+    },
   },
 };
 
 const options = {
   swaggerDefinition,
-  apis: [__dirname + '/swagger/userSwagger.js'],
+  apis: [__dirname + '/swagger/userSwagger.js', __dirname + '/swagger/productSwagger.js'],
 };
 
 const swaggerSpec = swaggerJsDoc(options);
