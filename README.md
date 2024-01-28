@@ -2,11 +2,13 @@
 
 This is a simple CRUD api in TypeScript, sequelize, aws rds or docker database.
 
-## Technologies Used
+## Technologies and Libraries Used
 
 - NodeJS
 - AWS RDS or Docker Database
-- Sequelize
+- Sequelize - ORM
+- Swagger - Documentation
+- Jest - Tests
 
 ## Installation
 
