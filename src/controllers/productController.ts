@@ -12,14 +12,18 @@ export class ProductController {
       const resultGetAllProducts = await this._productService.getAllProducts();
       return res.status(200).json(resultGetAllProducts);
     } catch (error) {
-      return res.status(500).json(`Some error occurred in GetAllProducts ${error}`);
+      return res.status(501).json(`Some error occurred in GetAllProducts ${error}`);
     }
   }
 
   async getProductById(req: any, res: any) {
     try {
       const resultOfGetProduct = await this._productService.getProductById(req);
-      return res.status(200).json(resultOfGetProduct);
+      if (resultOfGetProduct === null) {
+        return res.status(404).json({ Message: `Product with id ${req.params.id} was not found.` })
+      } else {
+        return res.status(200).json(resultOfGetProduct);
+      }
     } catch (error) {
       return res.status(500).json(`Some error ocurred in getProductById ${error}`);
     }
@@ -28,7 +32,8 @@ export class ProductController {
   async createProduct(req: any, res: any) {
     try {
       const resultOfCreateProduct = await this._productService.createProduct(req);
-      return res.status(200).json(resultOfCreateProduct);
+      if (!resultOfCreateProduct) return res.status(500).json('No result returned from createProduct')
+      return res.status(201).json(resultOfCreateProduct);
     } catch (error) {
       return res.status(500).json(`Some error occurred in createProduct ${error}`);
     }
@@ -46,7 +51,7 @@ export class ProductController {
   async deleteProduct(req: any, res: any) {
     try {
       if (req.params.id === null || undefined) {
-        console.log(`Cannot delete user whitout id`);
+        return res.status(404).json({ Message: `Product with id ${req.params.id} was not nound` })
       }
       await this._productService.delteProduct(req);
       return res.status(200).json(`User wiht id ${req.params.id} was delete with success!`);
