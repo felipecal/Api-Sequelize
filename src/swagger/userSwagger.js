@@ -4,14 +4,16 @@
  *   get:
  *     tags:
  *      - User
- *     description: Returns all users from database.
+ *     description: Returns all users from the database.
  *     produces:
  *       - application/json
  *     responses:
  *       200:
- *         description: A list of users
- *         schema:
- *           $ref: '#/components/schemas/User'
+ *         description: A list of users.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
  */
 
 /**
@@ -31,10 +33,12 @@
  *     responses:
  *       200:
  *         description: Return a user by the id.
- *         schema:
- *           $ref: '#/components/schemas/User'
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
  *       404:
- *         description: User was not found
+ *         description: User not found.
  */
 
 
@@ -66,8 +70,8 @@
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/User'
- *       400:
- *         description: Authentication error.
+ *       401:
+ *         description: User not found or authentication error.
  */
 
 /**
@@ -76,7 +80,7 @@
  *   post:
  *     tags:
  *      - User
- *     description: Check if user token is valid.
+ *     description: Check if the user token is valid.
  *     produces:
  *       - application/json
  *     requestBody:
@@ -96,7 +100,7 @@
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/User'
- *       400:
+ *       401:
  *         description: Error in validate Token.
  */
 
@@ -124,7 +128,7 @@
  *               email:
  *                 type: string
  *     responses:
- *       200:
+ *       201:
  *         description: Return the user that was created.
  *         content:
  *           application/json:
@@ -190,8 +194,10 @@
  *     responses:
  *       200:
  *         description: Return the id of the user that was deleted.
- *         schema:
- *           $ref: '#/components/schemas/User'
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
  *       500:
- *         description: Some error occurred in deleteUser
+ *         description: Some error occurred in deleteUser.
  */
