@@ -1,5 +1,4 @@
 {
-  "User": {
     "type": "object",
     "properties": {
       "user_id": {
@@ -27,5 +26,4 @@
       "password": "secretpassword",
       "email": "tony_iommi@example.com"
     }
-  }
 }

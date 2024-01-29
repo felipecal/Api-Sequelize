@@ -1,5 +1,4 @@
 {
-  "Product": {
     "type": "object",
     "properties": {
       "product_id": {
@@ -34,5 +33,4 @@
       "value":  1000.00,
       "cod_user": 1
     }
-  }
 }
