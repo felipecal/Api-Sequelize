@@ -18,9 +18,7 @@ const swaggerDefinition = {
     description: 'Documentation of the Sequelize API',
   },
   components: {
-    schemas:
-      { User: require('./swagger/userSchema.json'), Product: require('./swagger/productSchema.json') }
-
+    schemas: { User: require('./swagger/userSchema.json'), Product: require('./swagger/productSchema.json') },
   },
 };
 

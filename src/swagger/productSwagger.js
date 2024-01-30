@@ -60,6 +60,8 @@
  *             properties:
  *               product_name:
  *                 type: string
+ *               quantity:
+ *                 type: integer
  *               description:
  *                 type: string
  *               value:
@@ -103,6 +105,8 @@
  *             properties:
  *               product_name:
  *                 type: string
+ *               quantity:
+ *                 type: integer
  *               description:
  *                 type: string
  *               value:
