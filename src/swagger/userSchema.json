@@ -19,11 +19,7 @@
       "description": "The email address of the user."
     }
   },
-  "required": [
-    "user_name",
-    "password",
-    "email"
-  ],
+  "required": ["user_name", "password", "email"],
   "example": {
     "user_id": 1,
     "user_name": "tony_iommi",
