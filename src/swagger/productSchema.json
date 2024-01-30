@@ -14,11 +14,11 @@
         "description": "The description of the product."
       },
       "value": {
-        "type": "string",
+        "type": "float",
         "description": "The value of the product."
       },
       "quantity": {
-        "type": "float",
+        "type": "integer",
         "description": "The quantity of products."
       },
       "cod_user": {
@@ -30,6 +30,7 @@
     "example": {
       "product_name": "Ryzen 5 5600X",
       "description": "Custo beneficio",
+      "quantity": 1,
       "value":  1000.00,
       "cod_user": 1
     }
