@@ -1,37 +1,36 @@
 {
-  "type": "object",
-  "properties": {
-    "product_id": {
-      "type": "integer",
-      "description": "Unique identifier for the product."
+    "type": "object",
+    "properties": {
+      "product_id": {
+        "type": "integer",
+        "description": "Unique identifier for the product."
+      },
+      "product_name": {
+        "type": "string",
+        "description": "The product_name of the product."
+      },
+      "description": {
+        "type": "string",
+        "description": "The description of the product."
+      },
+      "value": {
+        "type": "string",
+        "description": "The value of the product."
+      },
+      "quantity": {
+        "type": "float",
+        "description": "The quantity of products."
+      },
+      "cod_user": {
+        "type": "integer",
+        "description": "The code of the user that has the product"
+      }
     },
-    "product_name": {
-      "type": "string",
-      "description": "The product_name of the product."
-    },
-    "description": {
-      "type": "string",
-      "description": "The description of the product."
-    },
-    "value": {
-      "type": "float",
-      "description": "The value of the product."
-    },
-    "quantity": {
-      "type": "integer",
-      "description": "The quantity of products."
-    },
-    "cod_user": {
-      "type": "integer",
-      "description": "The code of the user that has the product"
+    "required": ["product_name", "description", "value", "quantity", "cod_user"],
+    "example": {
+      "product_name": "Ryzen 5 5600X",
+      "description": "Custo beneficio",
+      "value":  1000.00,
+      "cod_user": 1
     }
-  },
-  "required": ["product_name", "description", "value", "quantity", "cod_user"],
-  "example": {
-    "product_name": "Ryzen 5 5600X",
-    "description": "Custo beneficio",
-    "quantity": 1,
-    "value": 1000.0,
-    "cod_user": 1
-  }
 }
