@@ -8,7 +8,7 @@ export class UserController {
     this._userService = new UserService();
   }
 
-  public async getAllUsers(req: Request, res: Response) {
+  public async getAllUsers(req: Request, res: Response): Promise<Response> {
     try {
       const result = await this._userService.getAllUsers();
       return res.status(200).json(result);
@@ -17,20 +17,20 @@ export class UserController {
     }
   }
 
-  async getUserById(req: Request, res: Response) {
+  async getUserById(req: Request, res: Response): Promise<Response> {
     try {
       const result = await this._userService.getUserById(req);
       if (result === null) {
         return res.status(404).json({ Message: `User with id ${req.params.id} was not found` });
       } else {
-        res.status(200).json(result);
+        return res.status(200).json(result);
       }
     } catch (error) {
-      throw new Error(`Some error ocurred in getUserById ${error}`);
+      return res.status(500).json({ Message: `Some error occurred in getUserById: ${error}` });
     }
   }
 
-  public async authenticateUser(req: Request, res: Response) {
+  public async authenticateUser(req: Request, res: Response): Promise<Response> {
     try {
       const resultOfAuthenticateUser = await this._userService.authenticateUser(req);
       if (resultOfAuthenticateUser === undefined) {
@@ -47,7 +47,7 @@ export class UserController {
     }
   }
 
-  public async validateUserToken(req: Request, res: Response) {
+  public async validateUserToken(req: Request, res: Response): Promise<Response> {
     try {
       const resultOfValidateToken = await this._userService.validateToken(req);
       return res.status(200).json(resultOfValidateToken);
@@ -57,17 +57,17 @@ export class UserController {
     }
   }
 
-  async createUser(req: Request, res: Response) {
+  async createUser(req: Request, res: Response): Promise<Response> {
     try {
       const result = await this._userService.createUser(req);
       if (!result) return res.status(500).json('No result returned from createUser');
       if (result.status.statusOfUser === 'updated') {
-        res.status(200).json({
+        return res.status(200).json({
           message: 'User was updated with success!',
           content: result.updateUserResult,
         });
       } else {
-        res.status(201).json({
+        return res.status(201).json({
           message: 'User was created with success!',
           content: result.userResult,
         });
@@ -77,7 +77,7 @@ export class UserController {
     }
   }
 
-  async updateUser(req: Request, res: Response) {
+  async updateUser(req: Request, res: Response): Promise<Response> {
     try {
       const result = await this._userService.updateUser(req);
       return res.status(200).json({ message: 'User was updated with success!', content: result });
@@ -86,7 +86,7 @@ export class UserController {
     }
   }
 
-  async deleteUser(req: Request, res: Response) {
+  async deleteUser(req: Request, res: Response): Promise<Response> {
     try {
       const result = await this._userService.deleteUserById(req);
       if (result === null) {
