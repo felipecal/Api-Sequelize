@@ -7,7 +7,7 @@ export class ProductController {
     this._productService = new ProductService();
   }
 
-  async getAllProducts(req: any, res: any) {
+  async getAllProducts(req: any, res: any): Promise<Response> {
     try {
       const resultGetAllProducts = await this._productService.getAllProducts();
       return res.status(200).json(resultGetAllProducts);
@@ -16,7 +16,7 @@ export class ProductController {
     }
   }
 
-  async getProductById(req: any, res: any) {
+  async getProductById(req: any, res: any): Promise<Response> {
     try {
       const resultOfGetProduct = await this._productService.getProductById(req);
       if (resultOfGetProduct === null) {
@@ -29,7 +29,7 @@ export class ProductController {
     }
   }
 
-  async createProduct(req: any, res: any) {
+  async createProduct(req: any, res: any): Promise<Response> {
     try {
       const resultOfCreateProduct = await this._productService.createProduct(req);
       if (!resultOfCreateProduct) return res.status(500).json('No result returned from createProduct');
@@ -39,7 +39,7 @@ export class ProductController {
     }
   }
 
-  async updateProduct(req: any, res: any) {
+  async updateProduct(req: any, res: any): Promise<Response> {
     try {
       const resultOfUpdateProduct = await this._productService.updateProduct(req);
       return res.status(200).json(resultOfUpdateProduct);
@@ -48,7 +48,7 @@ export class ProductController {
     }
   }
 
-  async deleteProduct(req: any, res: any) {
+  async deleteProduct(req: any, res: any): Promise<Response> {
     try {
       if (req.params.id === null || undefined) {
         return res.status(404).json({ Message: `Product with id ${req.params.id} was not nound` });
