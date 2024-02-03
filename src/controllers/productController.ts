@@ -53,7 +53,7 @@ export class ProductController {
       if (req.params.id === null || undefined) {
         return res.status(404).json({ Message: `Product with id ${req.params.id} was not nound` });
       }
-      await this._productService.delteProduct(req);
+      await this._productService.deleteProduct(req);
       return res.status(200).json(`User wiht id ${req.params.id} was delete with success!`);
     } catch (error) {
       return res.status(500).json(`Some error occurred in deleteProduct ${error}`);
