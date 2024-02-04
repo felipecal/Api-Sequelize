@@ -3,23 +3,29 @@ import { Request } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+import AuthenticationResponse from '../interfaces/AuthenticationInterface';
+import ValidateTokenResponse from '../interfaces/TokenInterface';
+
 export class UserService {
-  public async getAllUsers() {
+  public async getAllUsers(): Promise<UserModel[]> {
     const result = await UserModel.findAll();
     return result;
   }
 
-  async getUserById(req: Request) {
+  async getUserById(req: Request): Promise<UserModel | undefined> {
     try {
       const userId = req.params.id;
       const resultOfGetUserById = await UserModel.findByPk(userId);
+      if (!resultOfGetUserById) throw new Error('fodac');
+      console.log(resultOfGetUserById?.dataValues);
+
       return resultOfGetUserById;
     } catch (error) {
       console.error(`Some error ocurred in getUserById ${error}`);
     }
   }
 
-  async authenticateUser(req: Request) {
+  async authenticateUser(req: Request): Promise<AuthenticationResponse> {
     try {
       const { user_name, password } = req.body;
       const user = await UserModel.findOne({
@@ -44,10 +50,11 @@ export class UserService {
       }
     } catch (error: any) {
       console.error(`Some error occurred in authenticateUser: ${error.message}`);
+      throw error;
     }
   }
 
-  async validateToken(req: Request) {
+  async validateToken(req: Request): Promise<ValidateTokenResponse> {
     try {
       const { token } = req.body;
       const secret_key = process.env.JWT_SECRET;
@@ -119,7 +126,7 @@ export class UserService {
     }
   }
 
-  async deleteUserById(req: Request) {
+  async deleteUserById(req: Request): Promise<void> {
     try {
       const userId = req.params.id;
       const getUser = await UserModel.findByPk(userId);

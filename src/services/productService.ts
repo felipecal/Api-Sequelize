@@ -1,7 +1,7 @@
 import { ProductModel } from '../models/productModel';
 
 export class ProductService {
-  async getAllProducts() {
+  async getAllProducts(): Promise<ProductModel[] | undefined> {
     try {
       const productResult = await ProductModel.findAll();
       return productResult;
@@ -10,7 +10,7 @@ export class ProductService {
     }
   }
 
-  async getProductById(req: any) {
+  async getProductById(req: any): Promise<ProductModel | null | undefined> {
     try {
       const productId = req.params.id;
       const productResult = await ProductModel.findByPk(productId);
@@ -20,7 +20,7 @@ export class ProductService {
     }
   }
 
-  async createProduct(req: any) {
+  async createProduct(req: any): Promise<ProductModel | undefined> {
     try {
       const productBody = req.body;
       if (!productBody) throw new Error('Cannot create the data, because the body is not passed');
@@ -37,7 +37,7 @@ export class ProductService {
     }
   }
 
-  async updateProduct(req: any) {
+  async updateProduct(req: any): Promise<[affectedCount: number, affectedRows: ProductModel[]] | undefined> {
     try {
       const productId = req.params.id;
       const body = req.body;
@@ -53,7 +53,7 @@ export class ProductService {
     }
   }
 
-  async delteProduct(req: any) {
+  async deleteProduct(req: any): Promise<void> {
     const productId = req.params.id;
     const getProduct = await ProductModel.findByPk(productId);
     if (getProduct) {
