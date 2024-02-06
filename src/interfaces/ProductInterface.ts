@@ -1,4 +1,4 @@
-import { ProductModel } from "../models/productModel";
+import { ProductModel } from '../models/productModel';
 
 export interface Product {
   product_id?: number;

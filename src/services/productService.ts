@@ -2,7 +2,6 @@ import { Product, UpdateProduct } from '../interfaces/ProductInterface';
 import { ProductModel } from '../models/productModel';
 import { Request } from 'express';
 
-
 export class ProductService {
   async getAllProducts(): Promise<ProductModel[] | { error: string }> {
     try {
@@ -10,7 +9,7 @@ export class ProductService {
       return productResult;
     } catch (error: unknown) {
       console.error(`Some error ocurred in getAllProducts ${error}`);
-      return { error: `Some error ocurred in getAllProducts ${error}` }
+      return { error: `Some error ocurred in getAllProducts ${error}` };
     }
   }
 
@@ -22,7 +21,7 @@ export class ProductService {
       return productResult?.dataValues;
     } catch (error: unknown) {
       console.error(`Some error ocurred in getProductById ${error}`);
-      return { error: `Some error ocurred in getProductById ${error}` }
+      return { error: `Some error ocurred in getProductById ${error}` };
     }
   }
 
@@ -57,7 +56,7 @@ export class ProductService {
       return resultOfUpdateUser[1][0].dataValues;
     } catch (error: unknown) {
       console.error(`Some error ocurred in updatePorudct ${error}`);
-      return { error: `Some error ocurred in updatePorudct ${error}` }
+      return { error: `Some error ocurred in updatePorudct ${error}` };
     }
   }
 
@@ -73,7 +72,7 @@ export class ProductService {
       }
     } catch (error: unknown) {
       console.error(`Product with id ${error} was not found`);
-      return { error: `Product with id ${error} was not found` }
+      return { error: `Product with id ${error} was not found` };
     }
   }
 }

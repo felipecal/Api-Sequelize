@@ -2,7 +2,6 @@ import { UserModel } from '../models/userModel';
 import { Request } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-
 import AuthenticationResponse from '../interfaces/AuthenticationInterface';
 import ValidateTokenResponse from '../interfaces/TokenInterface';
 import { CreateUser, User } from '../interfaces/UserInterface';
