@@ -1,26 +1,32 @@
+import { Product, UpdateProduct } from '../interfaces/ProductInterface';
 import { ProductModel } from '../models/productModel';
+import { Request } from 'express';
+
 
 export class ProductService {
-  async getAllProducts(): Promise<ProductModel[] | undefined> {
+  async getAllProducts(): Promise<ProductModel[] | { error: string }> {
     try {
       const productResult = await ProductModel.findAll();
       return productResult;
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(`Some error ocurred in getAllProducts ${error}`);
+      return { error: `Some error ocurred in getAllProducts ${error}` }
     }
   }
 
-  async getProductById(req: any): Promise<ProductModel | null | undefined> {
+  async getProductById(req: Request): Promise<Product> {
     try {
       const productId = req.params.id;
       const productResult = await ProductModel.findByPk(productId);
-      return productResult;
-    } catch (error) {
+      console.log('productResult', productResult?.dataValues);
+      return productResult?.dataValues;
+    } catch (error: unknown) {
       console.error(`Some error ocurred in getProductById ${error}`);
+      return { error: `Some error ocurred in getProductById ${error}` }
     }
   }
 
-  async createProduct(req: any): Promise<ProductModel | undefined> {
+  async createProduct(req: Request): Promise<Product> {
     try {
       const productBody = req.body;
       if (!productBody) throw new Error('Cannot create the data, because the body is not passed');
@@ -31,13 +37,14 @@ export class ProductService {
         quantity: productBody.quantity,
         cod_user: productBody.cod_user,
       });
-      return productResult;
-    } catch (error) {
+      return productResult.dataValues;
+    } catch (error: unknown) {
       console.error(`Some error ocurred in createProduct ${error}`);
+      return { error: `Some error ocurred in createProduct ${error}` };
     }
   }
 
-  async updateProduct(req: any): Promise<[affectedCount: number, affectedRows: ProductModel[]] | undefined> {
+  async updateProduct(req: Request): Promise<UpdateProduct> {
     try {
       const productId = req.params.id;
       const body = req.body;
@@ -47,20 +54,26 @@ export class ProductService {
         where: { product_id: productId },
         returning: true,
       });
-      return resultOfUpdateUser;
-    } catch (error) {
+      return resultOfUpdateUser[1][0].dataValues;
+    } catch (error: unknown) {
       console.error(`Some error ocurred in updatePorudct ${error}`);
+      return { error: `Some error ocurred in updatePorudct ${error}` }
     }
   }
 
-  async deleteProduct(req: any): Promise<void> {
-    const productId = req.params.id;
-    const getProduct = await ProductModel.findByPk(productId);
-    if (getProduct) {
-      const deleteProduct = await getProduct.destroy();
-      return deleteProduct;
-    } else {
-      console.error(`Product with id ${productId} was not found`);
+  async deleteProduct(req: Request): Promise<void | { error: string }> {
+    try {
+      const productId = req.params.id;
+      const getProduct = await ProductModel.findByPk(productId);
+      if (getProduct) {
+        const deleteProduct = await getProduct.destroy();
+        return deleteProduct;
+      } else {
+        throw new Error(`Product with id ${productId} was not found`);
+      }
+    } catch (error: unknown) {
+      console.error(`Product with id ${error} was not found`);
+      return { error: `Product with id ${error} was not found` }
     }
   }
 }
