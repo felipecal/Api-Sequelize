@@ -1,4 +1,4 @@
-import { UserModel } from "../models/userModel";
+import { UserModel } from '../models/userModel';
 
 export interface CreateUser {
   status?: {
@@ -22,4 +22,3 @@ export interface UpdateUser {
   content?: [number, UserModel[]] | { error: string };
   error?: string;
 }
-

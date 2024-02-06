@@ -21,7 +21,7 @@ export class UserService {
       return resultOfGetUserById as User;
     } catch (error: unknown) {
       console.error(`Some error ocurred in getUserById ${error}`);
-      return { error: `Some error ocurred in getUserById ${error}` }
+      return { error: `Some error ocurred in getUserById ${error}` };
     }
   }
 
@@ -50,7 +50,7 @@ export class UserService {
       }
     } catch (error: unknown) {
       console.error(`Some error occurred in authenticateUser: ${error}`);
-      return { error: `Some error occurred in authenticateUser: ${error}` }
+      return { error: `Some error occurred in authenticateUser: ${error}` };
     }
   }
 
@@ -107,7 +107,7 @@ export class UserService {
       return { userResult, status };
     } catch (error: unknown) {
       console.error(`Erro ao criar/atualizar usuário: ${error}`);
-      return { error: `Erro ao criar/atualizar usuário: ${error}` }
+      return { error: `Erro ao criar/atualizar usuário: ${error}` };
     }
   }
 
@@ -124,7 +124,7 @@ export class UserService {
       return resultOfUpdateUser[1][0].dataValues;
     } catch (error: unknown) {
       console.error(`Some error ocurred in updateUser ${error}`);
-      return { error: `Some error ocurred in updateUser ${error}` }
+      return { error: `Some error ocurred in updateUser ${error}` };
     }
   }
 
@@ -140,7 +140,7 @@ export class UserService {
       }
     } catch (error: unknown) {
       console.error(`Some error ocurred in deleteUserByID ${error}`);
-      return { error: `Some error ocurred in deleteUserByID ${error}` }
+      return { error: `Some error ocurred in deleteUserByID ${error}` };
     }
   }
 }
