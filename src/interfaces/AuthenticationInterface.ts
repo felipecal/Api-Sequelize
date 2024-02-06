@@ -1,6 +1,7 @@
 export default interface AuthenticationResponse {
-  success: boolean;
+  success?: boolean;
   token?: string;
   type?: { [key: string]: string };
   message?: string;
+  error?: string;
 }

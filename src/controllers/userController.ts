@@ -60,8 +60,8 @@ export class UserController {
   async createUser(req: Request, res: Response): Promise<Response> {
     try {
       const result = await this._userService.createUser(req);
-      if (!result) return res.status(500).json('No result returned from createUser');
-      if (result.status.statusOfUser === 'updated') {
+      if (result?.error) return res.status(500).json('No result returned from createUser');
+      if (result?.status?.statusOfUser === 'updated') {
         return res.status(200).json({
           message: 'User was updated with success!',
           content: result.updateUserResult,
@@ -69,7 +69,7 @@ export class UserController {
       } else {
         return res.status(201).json({
           message: 'User was created with success!',
-          content: result.userResult,
+          content: result?.userResult,
         });
       }
     } catch (error) {

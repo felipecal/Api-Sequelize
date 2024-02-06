@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 
 import AuthenticationResponse from '../interfaces/AuthenticationInterface';
 import ValidateTokenResponse from '../interfaces/TokenInterface';
+import { CreateUser, User } from '../interfaces/UserInterface';
 
 export class UserService {
   public async getAllUsers(): Promise<UserModel[]> {
@@ -12,16 +13,15 @@ export class UserService {
     return result;
   }
 
-  async getUserById(req: Request): Promise<UserModel | undefined> {
+  async getUserById(req: Request): Promise<User> {
     try {
-      const userId = req.params.id;
+      const userId: string = req.params.id;
       const resultOfGetUserById = await UserModel.findByPk(userId);
-      if (!resultOfGetUserById) throw new Error('fodac');
-      console.log(resultOfGetUserById?.dataValues);
-
-      return resultOfGetUserById;
-    } catch (error) {
+      if (!resultOfGetUserById) throw new Error(`The user with id ${userId} was not found`);
+      return resultOfGetUserById as User;
+    } catch (error: unknown) {
       console.error(`Some error ocurred in getUserById ${error}`);
+      return { error: `Some error ocurred in getUserById ${error}` }
     }
   }
 
@@ -48,9 +48,9 @@ export class UserService {
           return { success: false, type: { password: 'Invalid password' }, message: 'Invalid Password' };
         }
       }
-    } catch (error: any) {
-      console.error(`Some error occurred in authenticateUser: ${error.message}`);
-      throw error;
+    } catch (error: unknown) {
+      console.error(`Some error occurred in authenticateUser: ${error}`);
+      return { error: `Some error occurred in authenticateUser: ${error}` }
     }
   }
 
@@ -63,13 +63,13 @@ export class UserService {
       }
       jwt.verify(token, secret_key);
       return { valid: true };
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(`Some error ocurred in validate user token`);
       return { valid: false };
     }
   }
 
-  async createUser(req: Request) {
+  async createUser(req: Request): Promise<CreateUser> {
     try {
       const body = req.body;
       if (!body) throw new Error('Body can not be null');
@@ -105,12 +105,13 @@ export class UserService {
       }
       const userResult = user.dataValues;
       return { userResult, status };
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(`Erro ao criar/atualizar usuário: ${error}`);
+      return { error: `Erro ao criar/atualizar usuário: ${error}` }
     }
   }
 
-  async updateUser(req: Request) {
+  async updateUser(req: Request): Promise<User> {
     try {
       const userId = req.params.id;
       const body = req.body;
@@ -120,13 +121,14 @@ export class UserService {
         where: { user_id: userId },
         returning: true,
       });
-      return resultOfUpdateUser;
-    } catch (error) {
+      return resultOfUpdateUser[1][0].dataValues;
+    } catch (error: unknown) {
       console.error(`Some error ocurred in updateUser ${error}`);
+      return { error: `Some error ocurred in updateUser ${error}` }
     }
   }
 
-  async deleteUserById(req: Request): Promise<void> {
+  async deleteUserById(req: Request): Promise<void | { error: string }> {
     try {
       const userId = req.params.id;
       const getUser = await UserModel.findByPk(userId);
@@ -136,8 +138,9 @@ export class UserService {
       } else {
         throw new Error(`User with id ${userId} was not found`);
       }
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(`Some error ocurred in deleteUserByID ${error}`);
+      return { error: `Some error ocurred in deleteUserByID ${error}` }
     }
   }
 }
