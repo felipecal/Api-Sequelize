@@ -8,11 +8,11 @@ export class UserController {
     this._userService = new UserService();
   }
 
-  public async getAllUsers(req: Request, res: Response): Promise<Response> {
+  public async getAllUsers(res: Response): Promise<Response> {
     try {
       const result = await this._userService.getAllUsers();
       return res.status(200).json(result);
-    } catch (error) {
+    } catch (error: unknown) {
       return res.status(501).json(`Some error ocurred in getAllUsers ${error}`);
     }
   }
@@ -25,7 +25,7 @@ export class UserController {
       } else {
         return res.status(200).json(result);
       }
-    } catch (error) {
+    } catch (error: unknown) {
       return res.status(500).json({ Message: `Some error occurred in getUserById: ${error}` });
     }
   }
@@ -41,7 +41,7 @@ export class UserController {
       } else {
         return res.status(401).json(resultOfAuthenticateUser);
       }
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(`Erro na autenticação: ${error}`);
       return res.status(401).json({ message: 'Authentication error.' });
     }
@@ -51,7 +51,7 @@ export class UserController {
     try {
       const resultOfValidateToken = await this._userService.validateToken(req);
       return res.status(200).json(resultOfValidateToken);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(`Some error ocurred in validateUserToken ${error}`);
       return res.status(401).json({ message: 'Error in validate Token' });
     }
@@ -72,7 +72,7 @@ export class UserController {
           content: result?.userResult,
         });
       }
-    } catch (error) {
+    } catch (error: unknown) {
       return res.status(500).json(`Some error occurred in createUser ${error}`);
     }
   }
@@ -81,7 +81,7 @@ export class UserController {
     try {
       const result = await this._userService.updateUser(req);
       return res.status(200).json({ message: 'User was updated with success!', content: result });
-    } catch (error) {
+    } catch (error: unknown) {
       return res.status(500).json(`Some error occurred in updateUser ${error}`);
     }
   }
@@ -94,7 +94,7 @@ export class UserController {
       } else {
         return res.status(200).json({ message: `User Deleted with Success`, content: result });
       }
-    } catch (error) {
+    } catch (error: unknown) {
       return res.status(500).json(`Some error occurred in deleteUser ${error}`);
     }
   }
