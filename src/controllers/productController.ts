@@ -1,3 +1,4 @@
+import { Request, Response } from 'express';
 import { ProductService } from '../services/productService';
 
 export class ProductController {
@@ -7,16 +8,16 @@ export class ProductController {
     this._productService = new ProductService();
   }
 
-  async getAllProducts(req: any, res: any): Promise<Response> {
+  async getAllProducts(req: Request, res: Response): Promise<Response> {
     try {
       const resultGetAllProducts = await this._productService.getAllProducts();
       return res.status(200).json(resultGetAllProducts);
-    } catch (error) {
+    } catch (error: unknown) {
       return res.status(501).json(`Some error occurred in GetAllProducts ${error}`);
     }
   }
 
-  async getProductById(req: any, res: any): Promise<Response> {
+  async getProductById(req: Request, res: Response): Promise<Response> {
     try {
       const resultOfGetProduct = await this._productService.getProductById(req);
       if (resultOfGetProduct === null) {
@@ -24,38 +25,38 @@ export class ProductController {
       } else {
         return res.status(200).json(resultOfGetProduct);
       }
-    } catch (error) {
+    } catch (error: unknown) {
       return res.status(500).json(`Some error ocurred in getProductById ${error}`);
     }
   }
 
-  async createProduct(req: any, res: any): Promise<Response> {
+  async createProduct(req: Request, res: Response): Promise<Response> {
     try {
       const resultOfCreateProduct = await this._productService.createProduct(req);
       if (!resultOfCreateProduct) return res.status(500).json('No result returned from createProduct');
       return res.status(201).json(resultOfCreateProduct);
-    } catch (error) {
+    } catch (error: unknown) {
       return res.status(500).json(`Some error occurred in createProduct ${error}`);
     }
   }
 
-  async updateProduct(req: any, res: any): Promise<Response> {
+  async updateProduct(req: Request, res: Response): Promise<Response> {
     try {
       const resultOfUpdateProduct = await this._productService.updateProduct(req);
       return res.status(200).json(resultOfUpdateProduct);
-    } catch (error) {
+    } catch (error: unknown) {
       return res.status(500).json(`Some error occurred in updateProduct ${error}`);
     }
   }
 
-  async deleteProduct(req: any, res: any): Promise<Response> {
+  async deleteProduct(req: Request, res: Response): Promise<Response> {
     try {
       if (req.params.id === null || undefined) {
         return res.status(404).json({ Message: `Product with id ${req.params.id} was not nound` });
       }
       await this._productService.deleteProduct(req);
       return res.status(200).json(`User wiht id ${req.params.id} was delete with success!`);
-    } catch (error) {
+    } catch (error: unknown) {
       return res.status(500).json(`Some error occurred in deleteProduct ${error}`);
     }
   }
