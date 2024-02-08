@@ -1,19 +1,19 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
 import { UserController } from '../controllers/userController';
 
 export const userRoutes = Router();
 const userController = new UserController();
 
-userRoutes.get('/getAllUsers', (req, res) => userController.getAllUsers(req, res));
+userRoutes.get('/getAllUsers', (req: Request, res: Response) => userController.getAllUsers(req, res));
 
-userRoutes.get('/getUser/:id', (req, res) => userController.getUserById(req, res));
+userRoutes.get('/getUser/:id', (req: Request, res: Response) => userController.getUserById(req, res));
 
-userRoutes.post('/authenticateUser', (req, res) => userController.authenticateUser(req, res));
+userRoutes.post('/authenticateUser', (req: Request, res: Response) => userController.authenticateUser(req, res));
 
-userRoutes.post('/createUser', (req, res) => userController.createUser(req, res));
+userRoutes.post('/createUser', (req: Request, res: Response) => userController.createUser(req, res));
 
-userRoutes.put('/updateUser/:id', (req, res) => userController.updateUser(req, res));
+userRoutes.put('/updateUser/:id', (req: Request, res: Response) => userController.updateUser(req, res));
 
-userRoutes.delete('/deleteUser/:id', (req, res) => userController.deleteUser(req, res));
+userRoutes.delete('/deleteUser/:id', (req: Request, res: Response) => userController.deleteUser(req, res));
 
-userRoutes.post('/validateToken', (req, res) => userController.validateUserToken(req, res));
+userRoutes.post('/validateToken', (req: Request, res: Response) => userController.validateUserToken(req, res));
