@@ -5,7 +5,7 @@ export const productsRoutes = Router();
 
 const productController = new ProductController();
 
-productsRoutes.get('/getAllProducts', (req: Request, res: Response) => productController.getAllProducts(req, res));
+productsRoutes.get('/getAllProducts', (req: Request, res: Response) => productController.getAllProducts(res));
 
 productsRoutes.get('/getProduct/:id', (req: Request, res: Response) => productController.getProductById(req, res));
 

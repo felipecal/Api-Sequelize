@@ -4,7 +4,7 @@ import { UserController } from '../controllers/userController';
 export const userRoutes = Router();
 const userController = new UserController();
 
-userRoutes.get('/getAllUsers', (req: Request, res: Response) => userController.getAllUsers(req, res));
+userRoutes.get('/getAllUsers', (res: Response) => userController.getAllUsers(res));
 
 userRoutes.get('/getUser/:id', (req: Request, res: Response) => userController.getUserById(req, res));
 
