@@ -3,15 +3,21 @@ import { ProductModel } from '../models/productModel';
 import { Request } from 'express';
 
 export class ProductService {
-  async getAllProducts(): Promise<ProductModel[] | { error: string }> {
+  async getAllProducts(req: any): Promise<ProductModel[] | { error: string }> {
     try {
-      const productResult = await ProductModel.findAll();
+      const { cod_user } = req.body;
+      const productResult = await ProductModel.findAll({
+        where: {
+          cod_user
+        }
+      });
       return productResult;
     } catch (error: unknown) {
       console.error(`Some error ocurred in getAllProducts ${error}`);
       return { error: `Some error ocurred in getAllProducts ${error}` };
     }
   }
+
 
   async getProductById(req: Request): Promise<Product> {
     try {
@@ -27,14 +33,14 @@ export class ProductService {
 
   async createProduct(req: Request): Promise<Product> {
     try {
-      const productBody = req.body;
-      if (!productBody) throw new Error('Cannot create the data, because the body is not passed');
+      if (!req.body) throw new Error('Cannot create the data, because the body is not passed');
+      const { product_name, description, value, quantity, cod_user } = req.body;
       const productResult = await ProductModel.create({
-        product_name: productBody.product_name,
-        description: productBody.description,
-        value: productBody.value,
-        quantity: productBody.quantity,
-        cod_user: productBody.cod_user,
+        product_name,
+        description,
+        value,
+        quantity,
+        cod_user
       });
       return productResult.dataValues;
     } catch (error: unknown) {
@@ -45,12 +51,16 @@ export class ProductService {
 
   async updateProduct(req: Request): Promise<UpdateProduct> {
     try {
-      const productId = req.params.id;
+      const product_id = req.params.id;
+      const { cod_user } = req.body;
       const body = req.body;
-      const product = await ProductModel.findByPk(productId);
+      const product = await ProductModel.findByPk(product_id);
       if (!product) throw new Error('Product not found');
       const resultOfUpdateUser = await ProductModel.update(body, {
-        where: { product_id: productId },
+        where: {
+          product_id,
+          cod_user
+        },
         returning: true,
       });
       return resultOfUpdateUser[1][0].dataValues;
