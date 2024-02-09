@@ -8,8 +8,8 @@ export class ProductService {
       const { cod_user } = req.body;
       const productResult = await ProductModel.findAll({
         where: {
-          cod_user
-        }
+          cod_user,
+        },
       });
       return productResult;
     } catch (error: unknown) {
@@ -17,7 +17,6 @@ export class ProductService {
       return { error: `Some error ocurred in getAllProducts ${error}` };
     }
   }
-
 
   async getProductById(req: Request): Promise<Product> {
     try {
@@ -40,7 +39,7 @@ export class ProductService {
         description,
         value,
         quantity,
-        cod_user
+        cod_user,
       });
       return productResult.dataValues;
     } catch (error: unknown) {
@@ -59,7 +58,7 @@ export class ProductService {
       const resultOfUpdateUser = await ProductModel.update(body, {
         where: {
           product_id,
-          cod_user
+          cod_user,
         },
         returning: true,
       });
