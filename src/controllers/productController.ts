@@ -8,9 +8,9 @@ export class ProductController {
     this._productService = new ProductService();
   }
 
-  async getAllProducts(res: Response): Promise<Response> {
+  async getAllProducts(req: Request, res: Response): Promise<Response> {
     try {
-      const resultGetAllProducts = await this._productService.getAllProducts();
+      const resultGetAllProducts = await this._productService.getAllProducts(req);
       return res.status(200).json(resultGetAllProducts);
     } catch (error: unknown) {
       return res.status(501).json(`Some error occurred in GetAllProducts ${error}`);
@@ -20,7 +20,7 @@ export class ProductController {
   async getProductById(req: Request, res: Response): Promise<Response> {
     try {
       const resultOfGetProduct = await this._productService.getProductById(req);
-      if (resultOfGetProduct === null) {
+      if (resultOfGetProduct === null || !resultOfGetProduct) {
         return res.status(404).json({ Message: `Product with id ${req.params.id} was not found.` });
       } else {
         return res.status(200).json(resultOfGetProduct);
