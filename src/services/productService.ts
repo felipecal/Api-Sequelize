@@ -11,6 +11,8 @@ export class ProductService {
           cod_user,
         },
       });
+      console.log('productResult', productResult);
+      
       return productResult;
     } catch (error: unknown) {
       console.error(`Some error ocurred in getAllProducts ${error}`);
@@ -22,7 +24,6 @@ export class ProductService {
     try {
       const productId = req.params.id;
       const productResult = await ProductModel.findByPk(productId);
-      console.log('productResult', productResult?.dataValues);
       return productResult?.dataValues;
     } catch (error: unknown) {
       console.error(`Some error ocurred in getProductById ${error}`);
