@@ -11,8 +11,6 @@ export class ProductService {
           cod_user,
         },
       });
-      console.log('productResult', productResult);
-      
       return productResult;
     } catch (error: unknown) {
       console.error(`Some error ocurred in getAllProducts ${error}`);
