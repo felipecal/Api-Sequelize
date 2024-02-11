@@ -6,7 +6,7 @@ import { verify } from 'jsonwebtoken';
 export const authMiddleware = (req: Request, res: Response, next: NextFunction): Response<Object> | void => {
   try {
     const token = req.headers.authorization;
-    if (!token) throw new Error('Token was not found')
+    if (!token) throw new Error('Token was not found');
     const secretKey: string | undefined = process.env.JWT_SECRET;
     if (!secretKey) {
       throw new Error('JWT_SECRET is not defined in the environment');
