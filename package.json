@@ -1,5 +1,6 @@
 {
-  "name": "Api-Aws-SDK3",
+  "name": "Api-Sequelize",
+  "author": "Felipe Caldas <felipe@caldas.dev>",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -7,11 +8,11 @@
     "start": "ts-node src/index.ts",
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/index.ts",
     "test": "jest --coverage --forceExit",
-    "build": "tsc",
+    "build:tsc": "tsc -p .",
+    "build:babel": "babel src --extensions .ts --copy-files --out-dir dist",
     "format": "yarn prettier --write ."
   },
   "dependencies": {
-    "@babel/preset-env": "^7.23.5",
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.9.5",
     "bcrypt": "^5.1.1",
@@ -27,6 +28,10 @@
     "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.23.9",
+    "@babel/core": "^7.23.9",
+    "@babel/node": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
     "@babel/preset-typescript": "^7.23.3",
     "@jest/globals": "^29.7.0",
     "@types/cors": "^2.8.17",
