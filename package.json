@@ -5,8 +5,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/index.ts",
+    "start": "npx ts-node src/index.ts",
+    "dev": "npx ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/index.ts",
     "test": "jest --coverage --forceExit",
     "build:tsc": "tsc -p .",
     "build:babel": "babel src --extensions .ts --copy-files --out-dir dist",
