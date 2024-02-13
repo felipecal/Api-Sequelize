@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { UserController } from '../controllers/userController';
+import { authMiddleware } from '../middlewares/authMiddleware';
 
 export const userRoutes = Router();
 const userController = new UserController();
@@ -12,7 +13,7 @@ userRoutes.post('/authenticateUser', (req: Request, res: Response) => userContro
 
 userRoutes.post('/createUser', (req: Request, res: Response) => userController.createUser(req, res));
 
-userRoutes.put('/updateUser/:id', (req: Request, res: Response) => userController.updateUser(req, res));
+userRoutes.put('/updateUser', authMiddleware, (req: Request, res: Response) => userController.updateUser(req, res));
 
 userRoutes.delete('/deleteUser/:id', (req: Request, res: Response) => userController.deleteUser(req, res));
 

@@ -112,12 +112,11 @@ export class UserService {
 
   async updateUser(req: Request): Promise<User> {
     try {
-      const userId = req.params.id;
       const body = req.body;
-      const user = await UserModel.findByPk(userId);
+      const user = await UserModel.findByPk(body.cod_user);
       if (!user) throw new Error('User not found');
       const resultOfUpdateUser = await UserModel.update(body, {
-        where: { user_id: userId },
+        where: { user_id: body.cod_user },
         returning: true,
       });
       return resultOfUpdateUser[1][0].dataValues;
