@@ -54,4 +54,14 @@ npm start
 or
 
 yarn start
+
 ```
+
+
+## Documentation
+
+- After running the application with the commands shown in "4. Start the application". Now you can access the route documentation, which was made with swagger.
+
+- After starting the application, simply access the url: http://localhost:3001/docs/
+
+- Remember that if you put port 3002 in your .env, the url you will access will be http://localhost:3002/docs/
