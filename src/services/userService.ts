@@ -57,11 +57,14 @@ export class UserService {
   async validateToken(req: Request): Promise<ValidateTokenResponse> {
     try {
       const { token } = req.body;
+      const [bearer, userToken] = token.split(' ');
+      console.log('token', userToken);
+      
       const secret_key = process.env.JWT_SECRET;
       if (!secret_key) {
         throw new Error('JWT_SECRET is not defined in the environment');
       }
-      jwt.verify(token, secret_key);
+      jwt.verify(userToken, secret_key);
       return { valid: true };
     } catch (error: unknown) {
       console.error(`Some error ocurred in validate user token`);
