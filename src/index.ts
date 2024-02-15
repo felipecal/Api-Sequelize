@@ -28,10 +28,10 @@ const options = {
 };
 
 const swaggerSpec = swaggerJsDoc(options);
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(cors());
 app.use(express.json());
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(userRoutes, productsRoutes);
 
 app.listen(port, () => {
