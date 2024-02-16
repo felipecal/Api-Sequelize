@@ -72,8 +72,6 @@
  *                 type: number
  *                 minimum: 0.00
  *                 maximum: 10000000.00
- *               cod_user:
- *                 type: integer
  *     responses:
  *       201:
  *         description: Return the product that was created.
@@ -117,8 +115,6 @@
  *                 type: string
  *               value:
  *                 type: float
- *               cod_user:
- *                 type: integer
  *     responses:
  *       200:
  *         description: Return the product that was updated.
