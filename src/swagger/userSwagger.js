@@ -58,7 +58,7 @@
  *           schema:
  *             type: object
  *             properties:
- *               username:
+ *               user_name:
  *                 type: string
  *               password:
  *                 type: string
