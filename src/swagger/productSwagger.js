@@ -5,6 +5,8 @@
  *     tags:
  *      - Product
  *     description: Returns all Products from the database.
+ *     security:
+ *       - BearerAuth: []
  *     produces:
  *       - application/json
  *     responses:
@@ -50,6 +52,8 @@
  *     description: Create a new Product.
  *     produces:
  *       - application/json
+ *     security:
+ *       - BearerAuth: []
  *     requestBody:
  *       description: Create a new product or update a product that already exists with the required fields.
  *       required: true
@@ -90,6 +94,8 @@
  *     description: Update a Product.
  *     produces:
  *       - application/json
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *      - in: path
  *        name: id
