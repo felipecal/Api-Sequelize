@@ -7,9 +7,13 @@ import ValidateTokenResponse from '../interfaces/TokenInterface';
 import { CreateUser, User } from '../interfaces/UserInterface';
 
 export class UserService {
-  public async getAllUsers(): Promise<UserModel[]> {
-    const result = await UserModel.findAll();
-    return result;
+  public async getAllUsers(): Promise<UserModel[] | { error: string }> {
+    try {
+      const result = await UserModel.findAll();
+      return result;
+    } catch (error: unknown) {
+      return { error: `Some error ocurred in getAllUsers ${error}` }
+    }
   }
 
   async getUserById(req: Request): Promise<User> {
@@ -59,7 +63,7 @@ export class UserService {
       const { token } = req.body;
       const [bearer, userToken] = token.split(' ');
       console.log('token', userToken);
-      
+
       const secret_key = process.env.JWT_SECRET;
       if (!secret_key) {
         throw new Error('JWT_SECRET is not defined in the environment');
