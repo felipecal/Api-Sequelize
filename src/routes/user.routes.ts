@@ -5,7 +5,7 @@ import { authMiddleware } from '../middlewares/authMiddleware';
 export const userRoutes = Router();
 const userController = new UserController();
 
-userRoutes.get('/getAllUsers', (res: Response) => userController.getAllUsers(res));
+userRoutes.get('/getAllUsers', (req: Request, res: Response) => userController.getAllUsers(req, res));
 
 userRoutes.get('/getUser/:id', (req: Request, res: Response) => userController.getUserById(req, res));
 

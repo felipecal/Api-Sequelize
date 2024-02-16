@@ -8,7 +8,7 @@ export class UserController {
     this._userService = new UserService();
   }
 
-  public async getAllUsers(res: Response): Promise<Response> {
+  public async getAllUsers(req: Request, res: Response): Promise<Response> {
     try {
       const result = await this._userService.getAllUsers();
       return res.status(200).json(result);
