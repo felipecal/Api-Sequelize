@@ -120,17 +120,34 @@ export class UserService {
 
   async updateUser(req: Request): Promise<User> {
     try {
+      const user_id = req.params.id;
       const body = req.body;
-      const user = await UserModel.findByPk(body.cod_user);
+      const user = await UserModel.findByPk(user_id);
       if (!user) throw new Error('User not found');
       const resultOfUpdateUser = await UserModel.update(body, {
-        where: { user_id: body.cod_user },
+        where: { user_id },
         returning: true,
       });
       return resultOfUpdateUser[1][0].dataValues;
     } catch (error: unknown) {
       console.error(`Some error ocurred in updateUser ${error}`);
       return { error: `Some error ocurred in updateUser ${error}` };
+    }
+  }
+
+  async autoUpdateUser(req: Request): Promise<User> {
+    try {
+      const body = req.body;
+      const user = await UserModel.findByPk(body.cod_user);
+      if (!user) throw new Error('User not found');
+      const resultOfAutoUpdateUser = await UserModel.update(body, {
+        where: { user_id: body.cod_user },
+        returning: true,
+      });
+      return resultOfAutoUpdateUser[1][0].dataValues;
+    } catch (error: unknown) {
+      console.error(`Some error ocurred in autoUpdateUser ${error}`);
+      return { error: `Some error ocurred in autoUpdateUser ${error}` };
     }
   }
 
