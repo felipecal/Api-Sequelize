@@ -209,7 +209,7 @@
  *             schema:
  *               $ref: '#/components/schemas/User'
  *       500:
- *         description: Some error occurred in updateUser.
+ *         description: Some error occurred in autoUpdateUser.
  */
 
 /**
