@@ -178,6 +178,42 @@
 
 /**
  * @swagger
+ * /autoUpdateUser:
+ *   put:
+ *     tags:
+ *      - User
+ *     description: Updates user using their own token.
+ *     produces:
+ *       - application/json
+ *     security:
+ *       - BearerAuth: []
+ *     requestBody:
+ *       description: Updates user using their own toke with the required fields.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               user_name:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Return the user that was updated.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       500:
+ *         description: Some error occurred in updateUser.
+ */
+
+/**
+ * @swagger
  * /deleteUser/{id}:
  *   delete:
  *     tags:
