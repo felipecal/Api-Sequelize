@@ -93,7 +93,7 @@ export class UserController {
       if (result.error) return res.status(404).json({ message: 'User was not found!', content: result });
       return res.status(200).json({ message: 'User was updated with success!', content: result });
     } catch (error: unknown) {
-      return res.status(500).json(`Some error occurred in updateUser ${error}`);
+      return res.status(500).json(`Some error occurred in autoUpdateUser ${error}`);
     }
   }
 
