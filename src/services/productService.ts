@@ -3,7 +3,7 @@ import { ProductModel } from '../models/productModel';
 import { Request } from 'express';
 
 export class ProductService {
-  async getAllProducts(req: any): Promise<ProductModel[] | { error: string }> {
+  async getAllProducts(req: Request): Promise<ProductModel[] | { error: string }> {
     try {
       const { cod_user } = req.body;
       const productResult = await ProductModel.findAll({

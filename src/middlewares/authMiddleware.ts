@@ -18,7 +18,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction):
     if (!secretKey) {
       throw new Error('JWT_SECRET is not defined in the environment');
     }
-    const decodedToken = verify(token, secretKey) as { user_id: any };
+    const decodedToken = verify(token, secretKey) as { user_id: number };
     req.body.cod_user = decodedToken.user_id;
     next();
   } catch (error: unknown) {
