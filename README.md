@@ -57,7 +57,6 @@ yarn start
 
 ```
 
-
 ## Documentation
 
 - After running the application with the commands shown in "4. Start the application". Now you can access the route documentation, which was made with swagger.

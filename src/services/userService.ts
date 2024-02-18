@@ -12,7 +12,7 @@ export class UserService {
       const result = await UserModel.findAll();
       return result;
     } catch (error: unknown) {
-      return { error: `Some error ocurred in getAllUsers ${error}` }
+      return { error: `Some error ocurred in getAllUsers ${error}` };
     }
   }
 
@@ -46,7 +46,7 @@ export class UserService {
             throw new Error('JWT_SECRET is not defined in the environment');
           }
           const token = jwt.sign({ user_id: user.dataValues.user_id }, secret_key, { expiresIn: '24h' });
-          const tokenWithBearer = `Bearer ${token}`
+          const tokenWithBearer = `Bearer ${token}`;
           return { success: true, token: tokenWithBearer };
         } else {
           return { success: false, type: { password: 'Invalid password' }, message: 'Invalid Password' };

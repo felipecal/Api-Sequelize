@@ -15,7 +15,9 @@ userRoutes.post('/createUser', (req: Request, res: Response) => userController.c
 
 userRoutes.put('/updateUser/:id', (req: Request, res: Response) => userController.updateUser(req, res));
 
-userRoutes.put('/autoUpdateUser', authMiddleware, (req: Request, res: Response) => userController.autoUpdateUser(req, res));
+userRoutes.put('/autoUpdateUser', authMiddleware, (req: Request, res: Response) =>
+  userController.autoUpdateUser(req, res),
+);
 
 userRoutes.delete('/deleteUser/:id', (req: Request, res: Response) => userController.deleteUser(req, res));
 
