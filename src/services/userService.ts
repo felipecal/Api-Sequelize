@@ -60,7 +60,10 @@ export class UserService {
 
   async validateToken(req: Request): Promise<ValidateTokenResponse> {
     try {
-      const { token } = req.body;
+      const token = req.headers.authorization;
+      if (!token) {
+        throw new Error('Token not found')
+      }
       const [bearer, userToken] = token.split(' ');
       console.log('token', userToken);
 
