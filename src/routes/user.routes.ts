@@ -19,6 +19,10 @@ userRoutes.put('/autoUpdateUser', authMiddleware, (req: Request, res: Response) 
   userController.autoUpdateUser(req, res),
 );
 
-userRoutes.delete('/deleteUser/:id', authMiddleware, (req: Request, res: Response) => userController.deleteUser(req, res));
+userRoutes.delete('/deleteUser/:id', authMiddleware, (req: Request, res: Response) =>
+  userController.deleteUser(req, res),
+);
 
-userRoutes.post('/validateToken', authMiddleware, (req: Request, res: Response) => userController.validateUserToken(req, res));
+userRoutes.post('/validateToken', authMiddleware, (req: Request, res: Response) =>
+  userController.validateUserToken(req, res),
+);

@@ -62,7 +62,7 @@ export class UserService {
     try {
       const token = req.headers.authorization;
       if (!token) {
-        throw new Error('Token not found')
+        throw new Error('Token not found');
       }
       const [bearer, userToken] = token.split(' ');
       console.log('token', userToken);
