@@ -11,9 +11,9 @@ userRoutes.get('/getUser/:id', authMiddleware, (req: Request, res: Response) => 
 
 userRoutes.post('/authenticateUser', (req: Request, res: Response) => userController.authenticateUser(req, res));
 
-userRoutes.post('/createUser', authMiddleware, (req: Request, res: Response) => userController.createUser(req, res));
+userRoutes.post('/createUser', (req: Request, res: Response) => userController.createUser(req, res));
 
-userRoutes.put('/updateUser/:id', authMiddleware, (req: Request, res: Response) => userController.updateUser(req, res));
+userRoutes.put('/updateUser/:id', (req: Request, res: Response) => userController.updateUser(req, res));
 
 userRoutes.put('/autoUpdateUser', authMiddleware, (req: Request, res: Response) =>
   userController.autoUpdateUser(req, res),
