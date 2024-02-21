@@ -65,8 +65,6 @@ export class UserService {
         throw new Error('Token not found');
       }
       const [bearer, userToken] = token.split(' ');
-      console.log('token', userToken);
-
       const secret_key = process.env.JWT_SECRET;
       if (!secret_key) {
         throw new Error('JWT_SECRET is not defined in the environment');
