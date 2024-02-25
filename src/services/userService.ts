@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import AuthenticationResponse from '../interfaces/AuthenticationInterface';
 import ValidateTokenResponse from '../interfaces/TokenInterface';
-import { CreateUser, User } from '../interfaces/UserInterface';
+import { CreateUser, CreateUserInput, User } from '../interfaces/UserInterface';
 
 export class UserService {
   public async getAllUsers(): Promise<UserModel[] | { error: string }> {
@@ -79,18 +79,22 @@ export class UserService {
 
   async createUser(req: Request): Promise<CreateUser> {
     try {
-      const body = req.body;
-      if (!body) throw new Error('Body can not be null');
+      const body: CreateUserInput = req.body;
+      const { user_name, password, email } = body;
+
+      if (!user_name || !password || !email) {
+        throw new Error('Body can not be null');
+      }
       const status = { statusOfUser: '' };
-      const hashedPassword = await bcrypt.hash(body.password, 12);
+      const hashedPassword = await bcrypt.hash(password, 12);
       const [user, created] = await UserModel.findOrCreate({
         where: {
           email: body.email,
         },
         defaults: {
-          user_name: body.user_name,
+          user_name,
           password: hashedPassword,
-          email: body.email,
+          email,
         },
       });
 
