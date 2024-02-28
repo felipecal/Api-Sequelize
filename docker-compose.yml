@@ -1,0 +1,34 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-easy-product
+    ports:
+      - 5432:5432
+    networks:
+      - easy-product
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  easy-product-api:
+    image: easy-product-api
+    container_name: easy-product-api
+    networks:
+      - easy-product
+    depends_on:
+      - postgres
+    ports:
+      - '3000:3000'
+
+networks:
+  easy-product:
+    driver: bridge
+
+volumes:
+  postgres:
+    driver: local
