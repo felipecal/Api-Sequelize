@@ -6,11 +6,11 @@ dotEnv();
 const dialect = 'postgres';
 
 export const sequelize = new Sequelize({
-  host: process.env.DB_HOST,
+  host: process.env.DB_HOST || 'postgres',
   port: parseInt(process.env.DB_PORT || '5432'),
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  username: process.env.DB_USERNAME || 'postgres', 
+  password: process.env.DB_PASSWORD || '1234',
+  database: process.env.DB_DATABASE  || 'postgres',
   dialect,
   logging: false,
   define: {
