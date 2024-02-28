@@ -9,6 +9,7 @@ This is a simple CRUD api in TypeScript, sequelize, aws rds or docker database.
 - Sequelize - ORM
 - Swagger - Documentation
 - Jest - Tests
+- Docker - Conteinarization
 
 ## Installation
 
