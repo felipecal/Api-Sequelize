@@ -41,7 +41,7 @@ export class UserService {
       } else {
         const passwordMatch = await bcrypt.compare(password, user.dataValues.password);
         if (passwordMatch) {
-          const secret_key = process.env.JWT_SECRET;
+          const secret_key: string = process.env.JWT_SECRET || '1234';
           if (!secret_key) {
             throw new Error('JWT_SECRET is not defined in the environment');
           }
@@ -65,7 +65,7 @@ export class UserService {
         throw new Error('Token not found');
       }
       const [bearer, userToken] = token.split(' ');
-      const secret_key = process.env.JWT_SECRET;
+      const secret_key: string = process.env.JWT_SECRET || '1234';
       if (!secret_key) {
         throw new Error('JWT_SECRET is not defined in the environment');
       }
