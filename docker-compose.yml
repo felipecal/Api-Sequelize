@@ -6,27 +6,27 @@ services:
     ports:
       - 5432:5432
     networks:
-      - easy-product
+      - easy-product-bridge
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
-      - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
       - postgres:/var/lib/postgresql/data
-
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      
   easy-product-api:
     image: easy-product-api
     container_name: easy-product-api
     networks:
-      - easy-product
+      - easy-product-bridge
     depends_on:
       - postgres
     ports:
       - '3001:3001'
 
 networks:
-  easy-product:
+  easy-product-bridge:
     driver: bridge
 
 volumes:
