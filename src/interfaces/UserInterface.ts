@@ -1,11 +1,8 @@
 import { UserModel } from '../models/userModel';
 
 export interface CreateUser {
-  status?: {
-    statusOfUser: string;
-  };
+  created?: boolean;
   userResult?: undefined;
-  updateUserResult?: undefined;
   error?: string;
 }
 
