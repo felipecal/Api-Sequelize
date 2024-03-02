@@ -61,15 +61,15 @@ export class UserController {
     try {
       const result = await this._userService.createUser(req);
       if (result?.error) return res.status(500).json('No result returned from createUser');
-      if (result?.status?.statusOfUser === 'updated') {
+      if (result?.created === false) {
         return res.status(200).json({
-          message: 'User was updated with success!',
-          content: result.updateUserResult,
+          message: 'User already exist!',
+          exist: true,
         });
       } else {
         return res.status(201).json({
           message: 'User was created with success!',
-          content: result?.userResult,
+          exist: false,
         });
       }
     } catch (error: unknown) {
