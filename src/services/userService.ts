@@ -86,18 +86,26 @@ export class UserService {
         throw new Error('Body can not be null');
       }
       const hashedPassword = await bcrypt.hash(password, 12);
-      const [user, created] = await UserModel.findOrCreate({
-        where: {
-          email: body.email,
-        },
-        defaults: {
-          user_name,
-          password: hashedPassword,
-          email,
-        },
+      const userWithEmail = await UserModel.findOne({
+        where: { email: body.email },
       });
-      const userResult = user.dataValues;
-      return { userResult, created };
+      if (!userWithEmail) {
+        const [user, created] = await UserModel.findOrCreate({
+          where: {
+            user_name,
+          },
+          defaults: {
+            user_name,
+            password: hashedPassword,
+            email,
+          },
+        });
+        const userResult = user.dataValues;
+        return { userResult, created };
+      } else {
+        const userResult = userWithEmail.dataValues;
+        return { userResult, created: false };
+      }
     } catch (error: unknown) {
       console.error(`Erro ao criar/atualizar usuário: ${error}`);
       return { error: `Erro ao criar/atualizar usuário: ${error}` };
