@@ -2,7 +2,7 @@ import { UserModel } from '../models/userModel';
 
 export interface CreateUser {
   created?: boolean;
-  userResult?: undefined;
+  userResult?: User;
   error?: string;
 }
 
@@ -17,6 +17,7 @@ export interface User {
   user_name?: string;
   password?: string;
   email?: string;
+  created?: boolean;
   error?: string;
 }
 
