@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ProductService } from '../services/productService';
+import { ProductService } from '../services/product.service';
 
 export class ProductController {
   private _productService: ProductService;
@@ -52,10 +52,13 @@ export class ProductController {
   async deleteProduct(req: Request, res: Response): Promise<Response> {
     try {
       if (req.params.id === null || undefined) {
-        return res.status(404).json({ Message: `Product with id ${req.params.id} was not nound` });
+        return res.status(404).json({ error: `You must pass a id in url` });
       }
-      await this._productService.deleteProduct(req);
-      return res.status(200).json({ Message: `User wiht id ${req.params.id} was delete with success!` });
+      const resultOfDeleteProduct = await this._productService.deleteProduct(req);
+      if (resultOfDeleteProduct?.error) {
+        return res.status(404).json({ error: `Product with id ${req.params.id} was not nound` });
+      }
+      return res.status(200).json({ message: `User wiht id ${req.params.id} was delete with success!` });
     } catch (error: unknown) {
       return res.status(500).json(`Some error occurred in deleteProduct ${error}`);
     }

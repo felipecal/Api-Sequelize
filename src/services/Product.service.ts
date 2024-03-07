@@ -71,6 +71,8 @@ export class ProductService {
   async deleteProduct(req: Request): Promise<void | { error: string }> {
     try {
       const productId = req.params.id;
+      console.log('productId', productId, typeof productId);
+      
       const getProduct = await ProductModel.findByPk(productId);
       if (getProduct) {
         const deleteProduct = await getProduct.destroy();
